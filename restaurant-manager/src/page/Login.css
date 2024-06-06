@@ -1,0 +1,73 @@
+html {
+    
+}
+
+body {
+    /* height: 100%; */
+}
+
+#root {
+    /* height: 100%; */
+}
+
+.login-container, .register-container {
+    height: 1000px;
+    background-image: url("../img/baongu.PNG");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login, .register {
+    margin-left: 10%;
+    margin-right: 10%;
+    height: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    align-content: center;
+}
+
+.login-title, .register-title {
+    justify-content: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.form-login, .form-register {
+    justify-content: center;
+}
+
+.form-login label, .form-register label {
+    font-size: 20px;
+}
+
+.form-login input, .form-register input {
+    height: 63px;
+    border: 0px;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.form-login input::placeholder, .form-register input::placeholder {
+    color: #9295A3;
+}
+
+.form-login button, .form-register button {
+    height: 62px;
+    font-size: 20px !important;
+}
+
+.login p, .register p {
+    padding: 0px !important;
+    font-size: 20px;
+}
+
+.txt-register, .txt-login {
+    color: #0029FF;
+}
+
+.txt-register:hover, .txt-login:hover {
+    cursor: pointer;
+}

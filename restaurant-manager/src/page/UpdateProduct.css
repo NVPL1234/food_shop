@@ -1,0 +1,43 @@
+button {
+    font-size: 20px !important;
+}
+
+.txt-product-id {
+    border: 1px solid #EFEFEF;
+    border-radius: 10px;
+    font-size: 20px;
+    
+}
+
+.txt-product-id::placeholder {
+    color: #9295A3;
+}
+
+table {
+    font-size: 20px;
+}
+
+.i-edit:hover {
+    cursor: pointer;
+}
+
+.page-num {
+    justify-content: center;
+}
+
+.page-num button {
+    margin-right: 10px;
+    width: 48px;
+    height: 48px;
+    border: white;
+    border-radius: 100%;
+    background-color: white;
+}
+
+.page-num button:hover {
+    background-color: rgb(251, 251, 251);
+}
+
+.page-num button.active {
+    background-color: rgb(251, 251, 251);
+}

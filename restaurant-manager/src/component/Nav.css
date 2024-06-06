@@ -1,0 +1,22 @@
+.i-delete {
+    cursor: pointer;
+}
+
+h6 {
+    font-weight: normal;
+    font-size: 18px;
+}
+
+button {
+    font-size: 20px !important;
+}
+
+.lbl-quantity {
+    padding-left: 15px;
+    font-size: 25px;
+}
+
+.lbl-total {
+    align-content: center;
+    margin-bottom: 0px;
+}

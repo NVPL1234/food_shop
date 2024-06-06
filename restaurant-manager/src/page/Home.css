@@ -1,0 +1,48 @@
+.txt-product-name {
+    height: 45px;
+    margin-right: 10px;
+    border: 1px solid #EFEFEF;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.txt-product-name::placeholder {
+    color: #9295A3;
+}
+
+.product {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.product:hover {
+    border: 1px solid rgb(215, 215, 215);
+    cursor: pointer;
+}
+
+h5, h6 {
+    word-break: break-word;
+}
+
+.lbl-quantity {
+    padding-left: 15px;
+    font-size: 25px;
+}
+
+.lbl-price {
+    color: #9295A3;
+}
+
+#txt-note {
+    margin-left: 10px;
+    padding-top: 10px;
+    border: 1px solid #EFEFEF;
+    border-radius: 10px;
+    resize: none;
+}
+
+#txt-note::placeholder {
+    color: #9295A3;
+}

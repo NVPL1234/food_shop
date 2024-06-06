@@ -1,0 +1,14 @@
+.carousel {
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.carousel-inner {
+    height: 700px;
+}
+
+.carousel-item img {
+    /* height: 700px;
+    width: 100%; */
+    /* aspect-ratio: 3 / 2 !important; */
+}
