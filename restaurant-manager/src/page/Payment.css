@@ -14,7 +14,7 @@ label {
     font-size: 20px;
 }
 
-.left input[type=text] {
+.left input[type=text], textarea {
     margin-bottom: 20px;
     height: 45px;
     border: 1px solid #EFEFEF;
@@ -22,7 +22,7 @@ label {
     font-size: 18px;
 }
 
-.left input[type=text]::placeholder {
+.left input[type=text]::placeholder, textarea::placeholder {
     color: #9295A3;
 }
 

@@ -1,3 +1,38 @@
+html {
+    height: 100%;
+}
+
+
 body {
+    height: 100%;
     background-color: #fbfbfb;
+}
+
+#root {
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #b4b4b4;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #989898;
 }

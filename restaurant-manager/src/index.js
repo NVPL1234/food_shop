@@ -5,13 +5,16 @@ import "bootstrap/dist/js/bootstrap.bundle.js"
 import './background.css'
 import App from './App.js'
 import reportWebVitals from './reportWebVitals'
-import { store } from './redux/store'
+import { persistor, store } from './redux/store'
 import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <App />
+    <PersistGate persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );
 

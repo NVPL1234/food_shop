@@ -12,27 +12,10 @@ export default function Slide() {
 
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <a href="https://mrchef.vn">
-                        <img src={require('../img/logo.png')} alt="Los Angeles" className="d-block" />
-                        <div className="carousel-caption">
-                            <h3 style={{color: 'black'}}>Tên món</h3>
-                            <p>30.000đ</p>
-                        </div>
-                    </a>
+                    <img src="https://firebasestorage.googleapis.com/v0/b/restaurantmanager-b7f1b.appspot.com/o/hu_tiu_xa_xiu.jpg?alt=media&token=debc018f-28af-47d6-9e66-6e2d0a150d1a" alt="Los Angeles" className="d-block" />
                 </div>
                 <div className="carousel-item">
-                <img src={require('../img/baongu.PNG')} alt="Los Angeles" className="d-block"/>
-                    <div className="carousel-caption">
-                        <h3>Chicago</h3>
-                        <p>Thank you, Chicago!</p>
-                    </div>
-                </div>
-                <div className="carousel-item">
-                <img src={require('../img/baongu.PNG')} alt="Los Angeles" className="d-block" />
-                    <div className="carousel-caption">
-                        <h3>New York</h3>
-                        <p>We love the Big Apple!</p>
-                    </div>
+                    <img src={require('../img/baongu.PNG')} alt="Los Angeles" className="d-block" />        
                 </div>
             </div>
 

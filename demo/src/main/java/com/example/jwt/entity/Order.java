@@ -2,10 +2,10 @@ package com.example.jwt.entity;
 
 import java.util.Date;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,12 +16,12 @@ import jakarta.persistence.Table;
 public class Order {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
-	private Long orderId;
+	private String orderId;
 
 	@Column(name = "order_date")
-	private Date orderDate;
+	@ColumnDefault(value = "CURRENT_TIMESTAMP")
+	private Date orderDate = new Date();
 
 	@Column(name = "order_status")
 	private int orderStatus;
@@ -34,11 +34,11 @@ public class Order {
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
 
-	public Long getOrderId() {
+	public String getOrderId() {
 		return orderId;
 	}
 
-	public void setOrderId(Long orderId) {
+	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
 
@@ -77,7 +77,7 @@ public class Order {
 	public Order() {
 	}
 
-	public Order(Long orderId, Date orderDate, int orderStatus, Customer customer, Employee employee) {
+	public Order(String orderId, Date orderDate, int orderStatus, Customer customer, Employee employee) {
 		this.orderId = orderId;
 		this.orderDate = orderDate;
 		this.orderStatus = orderStatus;

@@ -1,0 +1,19 @@
+.notify {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10%;
+    justify-content: center;
+}
+
+.notify > div {
+    justify-content: center;
+}
+
+.io-checkmark {
+    background-color: green;
+    border-radius: 100%
+}
+
+.notify h5, .notify p {
+    text-align: center;
+}

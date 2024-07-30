@@ -14,6 +14,16 @@ INSERT [dbo].[users] ([user_id], [password], [username], [role_id]) VALUES (1, N
 GO
 SET IDENTITY_INSERT [dbo].[users] OFF
 GO
+INSERT [dbo].[customers] ([customer_id], [address], [customer_name], [phone_number]) VALUES (1, N'a', N'a', N'0')
+GO
+SET IDENTITY_INSERT [dbo].[option_categories] ON 
+GO
+INSERT [dbo].[option_categories] ([option_category_id], [choose_multiple], [obligate], [option_category_name]) VALUES (1, 1, 0, N'Món thêm')
+GO
+INSERT [dbo].[option_categories] ([option_category_id], [choose_multiple], [obligate], [option_category_name]) VALUES (2, 0, 1, N'Lượng cơm')
+GO
+SET IDENTITY_INSERT [dbo].[option_categories] OFF
+GO
 SET IDENTITY_INSERT [dbo].[product_categories] ON 
 GO
 INSERT [dbo].[product_categories] ([product_category_id], [product_category_name]) VALUES (1, N'Hủ tíu')
@@ -88,14 +98,6 @@ INSERT [dbo].[products] ([product_id], [img_path], [product_name], [quantity], [
 GO
 SET IDENTITY_INSERT [dbo].[products] OFF
 GO
-SET IDENTITY_INSERT [dbo].[option_categories] ON 
-GO
-INSERT [dbo].[option_categories] ([option_category_id], [is_choose_multiple], [is_obligate], [option_category_name]) VALUES (1, 1, 0, N'Món thêm')
-GO
-INSERT [dbo].[option_categories] ([option_category_id], [is_choose_multiple], [is_obligate], [option_category_name]) VALUES (2, 0, 1, N'Lượng cơm')
-GO
-SET IDENTITY_INSERT [dbo].[option_categories] OFF
-GO
 INSERT [dbo].[option_details] ([option_category_id], [product_id]) VALUES (1, 57)
 GO
 INSERT [dbo].[option_details] ([option_category_id], [product_id]) VALUES (2, 57)
@@ -119,4 +121,3 @@ GO
 INSERT [dbo].[options] ([option_id], [option_name], [unit_price], [option_category_id]) VALUES (8, N'100%', 0, 2)
 GO
 SET IDENTITY_INSERT [dbo].[options] OFF
-GO

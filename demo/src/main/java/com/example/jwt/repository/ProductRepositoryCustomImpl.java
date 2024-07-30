@@ -30,7 +30,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
 	@Override
 	@Transactional
 	public List<OptionDTO> getOptions(Long productId) {
-		Query query = entityManager.createNativeQuery("SELECT is_choose_multiple, is_obligate, option_category_name, option_name, O.unit_price FROM products P JOIN option_details OD ON P.product_id = OD.product_id JOIN option_categories OC ON OD.option_category_id = OC.option_category_id JOIN options O ON OC.option_category_id = O.option_category_id WHERE P.product_id = " + productId, OptionDTO.class);
+		Query query = entityManager.createNativeQuery("SELECT choose_multiple, obligate, option_category_name, option_id, option_name, unit_price FROM option_details OD JOIN option_categories OC ON OD.option_category_id = OC.option_category_id JOIN options O ON OC.option_category_id = O.option_category_id WHERE OD.product_id = " + productId, OptionDTO.class);
 		return query.getResultList();
 	}
 }

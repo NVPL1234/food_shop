@@ -16,13 +16,14 @@ export default function UpdateProduct() {
     const [products, setProducts] = useState([])
     // const [pageNumber, setPageNumber] = useState(0)
     const pageNumber = useSelector((state) => state.pageNumber.value)
+    const token = useSelector((state) => state.user.value.token)
     const dispatch = useDispatch()
 
     let getData = async (pageNumber) => {
         try {
             let res = await axios.get(url + "products?pageNumber=" + pageNumber, {
                 headers: {
-                    'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE2OTU1MDY2LCJleHAiOjE3MTc1NTk4NjZ9.lkr5KtHb4-0URbTvPEqKy7TB8YUs7B1uQPL1K3qbqXyF_tPwq9qGigwa2VQO2BxsQ3i8sEzJLFTj3fR5JSlkmw'
+                    'Authorization': 'Bearer ' + token
                 }
             })
             setProducts(res.data)

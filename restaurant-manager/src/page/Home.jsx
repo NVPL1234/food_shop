@@ -42,13 +42,12 @@ export default function Home() {
             <section className="row mt-3">
                 {
                     products.map((product, i, arr) =>
-                        <div className="col-md-4" key={i}>
+                        <div className="col-6 col-sm-3 col-md-3" key={i}>
                             {i == 0 ? <h5 className="row">{product.productCategoryName}</h5> : arr[i - 1].productCategoryName != product.productCategoryName && <h5 className="row">{product.productCategoryName}</h5>}
                             <div className="row product" data-bs-toggle="modal" data-bs-target="#myModal" onClick={e => setProduct(product)}>
-                                <img src={product.imgPath} width="100px" />
+                                <img src={product.imgPath} />
                                 <h5>{product.productName}</h5>
                                 <h6>{product.unitPrice}đ</h6>
-                                <h1>{product.productId}</h1>
                             </div>
                         </div>
                     )
@@ -67,10 +66,6 @@ export default function Home() {
 
                         <div className="modal-body">
                             {product != null && <FormOrder product={product} />}
-                        </div>
-
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-success" data-bs-dismiss="modal">Thêm vào giỏ +150.000đ</button>
                         </div>
                     </div>
                 </div>

@@ -2,29 +2,36 @@ package com.example.jwt.dto;
 
 public class OptionDTO {
 
-	private boolean isChooseMultiple;
-	private boolean isObligate;
+	private boolean chooseMultiple;
+	private boolean obligate;
 	private String optionCategoryName;
+	private Long optionId;
 	private String optionName;
 	private double unitPrice;
 	
 	public boolean isChooseMultiple() {
-		return isChooseMultiple;
+		return chooseMultiple;
 	}
-	public void setChooseMultiple(boolean isChooseMultiple) {
-		this.isChooseMultiple = isChooseMultiple;
+	public void setChooseMultiple(boolean chooseMultiple) {
+		this.chooseMultiple = chooseMultiple;
 	}
 	public boolean isObligate() {
-		return isObligate;
+		return obligate;
 	}
-	public void setObligate(boolean isObligate) {
-		this.isObligate = isObligate;
+	public void setObligate(boolean obligate) {
+		this.obligate = obligate;
 	}
 	public String getOptionCategoryName() {
 		return optionCategoryName;
 	}
 	public void setOptionCategoryName(String optionCategoryName) {
 		this.optionCategoryName = optionCategoryName;
+	}
+	public Long getOptionId() {
+		return optionId;
+	}
+	public void setOptionId(Long optionId) {
+		this.optionId = optionId;
 	}
 	public String getOptionName() {
 		return optionName;
@@ -41,19 +48,20 @@ public class OptionDTO {
 	
 	public OptionDTO() {
 	}
-	public OptionDTO(boolean isChooseMultiple, boolean isObligate, String optionCategoryName, String optionName,
-			double unitPrice) {
-		this.isChooseMultiple = isChooseMultiple;
-		this.isObligate = isObligate;
+	public OptionDTO(boolean chooseMultiple, boolean obligate, String optionCategoryName, Long optionId,
+			String optionName, double unitPrice) {
+		this.chooseMultiple = chooseMultiple;
+		this.obligate = obligate;
 		this.optionCategoryName = optionCategoryName;
+		this.optionId = optionId;
 		this.optionName = optionName;
 		this.unitPrice = unitPrice;
 	}
 	
 	@Override
 	public String toString() {
-		return "OptionDTO [isChooseMultiple=" + isChooseMultiple + ", isObligate=" + isObligate
-				+ ", optionCategoryName=" + optionCategoryName + ", optionName=" + optionName + ", unitPrice="
+		return "OptionDTO [chooseMultiple=" + chooseMultiple + ", obligate=" + obligate + ", optionCategoryName="
+				+ optionCategoryName + ", optionId=" + optionId + ", optionName=" + optionName + ", unitPrice="
 				+ unitPrice + "]";
 	}
 }

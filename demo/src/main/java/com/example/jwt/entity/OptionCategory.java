@@ -19,50 +19,56 @@ public class OptionCategory {
 	@Column(name = "option_category_name", columnDefinition = "nvarchar(100)")
 	private String optionCategoryName;
 	
-	@Column(name = "is_obligate")
-	private boolean isObligate;
+	private boolean obligate;
 	
-	@Column(name = "is_choose_multiple")
-	private boolean isChooseMultiple;
-	
+	@Column(name = "choose_multiple")
+	private boolean chooseMultiple;
+
 	public Long getOptionCategoryId() {
 		return optionCategoryId;
 	}
+
 	public void setOptionCategoryId(Long optionCategoryId) {
 		this.optionCategoryId = optionCategoryId;
 	}
+
 	public String getOptionCategoryName() {
 		return optionCategoryName;
 	}
+
 	public void setOptionCategoryName(String optionCategoryName) {
 		this.optionCategoryName = optionCategoryName;
 	}
+
 	public boolean isObligate() {
-		return isObligate;
+		return obligate;
 	}
-	public void setObligate(boolean isObligate) {
-		this.isObligate = isObligate;
+
+	public void setObligate(boolean obligate) {
+		this.obligate = obligate;
 	}
+
 	public boolean isChooseMultiple() {
-		return isChooseMultiple;
+		return chooseMultiple;
 	}
-	public void setChooseMultiple(boolean isChooseMultiple) {
-		this.isChooseMultiple = isChooseMultiple;
+
+	public void setChooseMultiple(boolean chooseMultiple) {
+		this.chooseMultiple = chooseMultiple;
 	}
-	
+
 	public OptionCategory() {
 	}
-	public OptionCategory(Long optionCategoryId, String optionCategoryName, boolean isObligate,
-			boolean isChooseMultiple) {
+
+	public OptionCategory(Long optionCategoryId, String optionCategoryName, boolean obligate, boolean chooseMultiple) {
 		this.optionCategoryId = optionCategoryId;
 		this.optionCategoryName = optionCategoryName;
-		this.isObligate = isObligate;
-		this.isChooseMultiple = isChooseMultiple;
+		this.obligate = obligate;
+		this.chooseMultiple = chooseMultiple;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "OptionCategory [optionCategoryId=" + optionCategoryId + ", optionCategoryName=" + optionCategoryName
-				+ ", isObligate=" + isObligate + ", isChooseMultiple=" + isChooseMultiple + "]";
+				+ ", obligate=" + obligate + ", chooseMultiple=" + chooseMultiple + "]";
 	}
 }

@@ -9,6 +9,7 @@ export default function Page() {
 
     // const pageNumber = prop.pageNumber
     // const setPageNumber = prop.setPageNumber
+    const token = useSelector((state) => state.user.value.token)
     const pageNumber = useSelector((state) => state.pageNumber.value)
     const dispatch = useDispatch()
     const [totalProduct, setTotalProduct] = useState(0)
@@ -19,7 +20,7 @@ export default function Page() {
     let countProduct = async () => {
         await axios.get(url + "products/count", {
             headers: {
-                'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzE2OTU1MDY2LCJleHAiOjE3MTc1NTk4NjZ9.lkr5KtHb4-0URbTvPEqKy7TB8YUs7B1uQPL1K3qbqXyF_tPwq9qGigwa2VQO2BxsQ3i8sEzJLFTj3fR5JSlkmw'
+                'Authorization': 'Bearer ' + token
             }
         })
             .then(res => {

@@ -1,10 +1,8 @@
 import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom"
 import { SlBasket } from "react-icons/sl"
-import { MdOutlineDeleteOutline } from "react-icons/md"
-import { HiOutlineMinus } from "react-icons/hi"
-import { IoAdd } from "react-icons/io5"
 import "./Nav.css"
+import Cart from './Cart'
 
 export default function Nav() {
 
@@ -92,60 +90,7 @@ export default function Nav() {
                         </div>
 
                         <div className="modal-body">
-                            <div className="container">
-                                <div className="row" style={{ borderBottom: "1px solid #EFEFEF" }}>
-                                    <div className="col-md-1">
-                                        <MdOutlineDeleteOutline size={25} className="i-delete" data-bs-toggle="tooltip" title="Xoá" />
-                                    </div>
-                                    <div className="col-md">
-                                        <img src="https://mrchef.vn/wp-content/uploads/2023/10/MrCheef_Logo-01.png" width="100px" />
-                                    </div>
-                                    <div className="col-md">
-                                        <h5>Cơm gà chiên</h5>
-                                        <h6>Mô tả....3 Gà Giòn Vui Vẻ + 5 Mỳ Ý Jolly + 4 Gà Giòn Không Xương + 2 Khoai Tây Vừa+ 5 Pepsi Vừa + 1 Balo Teen Jollibee + 1 Nón Sinh Nhật + 1 Thiệp Sinh Nhật</h6>
-                                    </div>
-                                    <div className="col-md">
-                                        <h5>25.000đ</h5>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <button type="button" className="btn btn-light"><HiOutlineMinus /></button>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <span className="lbl-quantity">1</span>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <button type="button" className="btn btn-light"><IoAdd /></button>
-                                    </div>
-                                </div>
-                                <div className="row" style={{ borderBottom: "1px solid #EFEFEF" }}>
-                                    <div className="col-md-1">
-                                        <MdOutlineDeleteOutline size={25} className="i-delete" data-bs-toggle="tooltip" title="Xoá" />
-                                    </div>
-                                    <div className="col-md">
-                                        <img src="https://mrchef.vn/wp-content/uploads/2023/10/MrCheef_Logo-01.png" width="100px" />
-                                    </div>
-                                    <div className="col-md">
-                                        <h5>Cơm gà chiên</h5>
-                                        <h6>Mô tả....3 Gà Giòn Vui Vẻ + 5 Mỳ Ý Jolly + 4 Gà Giòn Không Xương + 2 Khoai Tây Vừa+ 5 Pepsi Vừa + 1 Balo Teen Jollibee + 1 Nón Sinh Nhật + 1 Thiệp Sinh Nhật</h6>
-                                    </div>
-                                    <div className="col-md">
-                                        <h5>25.000đ</h5>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <button type="button" className="btn btn-light"><HiOutlineMinus /></button>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <span className="lbl-quantity">1</span>
-                                    </div>
-                                    <div className="col-md-1">
-                                        <button type="button" className="btn btn-light"><IoAdd /></button>
-                                    </div>
-                                </div>
-                                <div className="row mt-3">
-                                    <h5 className="col-md lbl-total">Tổng cộng: 150.000đ</h5>
-                                    <button type="button" className="col-md-2 btn btn-success" data-bs-dismiss="modal">Đặt hàng</button>
-                                </div>
-                            </div>
+                            <Cart />
                         </div>
                     </div>
                 </div>

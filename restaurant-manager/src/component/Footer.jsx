@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import "./Footer.css"
 
 export default function Footer() {
@@ -11,9 +12,9 @@ export default function Footer() {
                     <span className="row">Số điện thoại: 0906953700</span>
                 </div>
                 <div className="col-md">
-                    <a href="#" className="row">Trang chủ</a>
-                    <a href="#" className="row">Giới thiệu</a>
-                    <a href="#" className="row">Gọi món</a>
+                    <Link className="nav-link">Trang chủ</Link>
+                    <Link className="nav-link">Giới thiệu</Link>
+                    <Link className="nav-link">Gọi món</Link>
                 </div>
             </div>
             <div className="row">
