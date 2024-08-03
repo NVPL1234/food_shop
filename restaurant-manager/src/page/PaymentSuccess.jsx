@@ -35,48 +35,30 @@ export default function PaymentSuccess() {
             for (let i = 0; i < carts.length; i++) {
                 let orderDetailsId = new Date().getTime()
                 let options = carts[i].options
-                if (options.length == 0)
-                    await axios.post(url + 'orderDetails', {
-                        id: {
-                            orderDetails: orderDetailsId,
-                            order: orderId,
-                            product: carts[i].product.productId
-                        },
-                        order: {
-                            orderId: orderId
-                        },
-                        product: {
-                            productId: carts[i].product.productId
-                        },
-                        quantity: carts[i].quantity,
-                        unitPriceProduct: carts[i].product.unitPrice,
-                        note: carts[i].note
-                    }, {
-                        headers: {
-                            'Authorization': 'Bearer ' + user.token
-                        }
-                    })
-                else
+                await axios.post(url + 'orderDetails', {
+                    id: {
+                        orderDetailsId: orderDetailsId,
+                        orderId: orderId,
+                        productId: carts[i].product.productId
+                    },
+                    quantity: carts[i].quantity,
+                    unitPriceProduct: carts[i].product.unitPrice,
+                    note: carts[i].note
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + user.token
+                    }
+                })
+                if (options.length > 0)
                     for (let j = 0; j < options.length; j++)
-                        await axios.post(url + 'orderDetails', {
+                        await axios.post(url + 'customs', {
                             id: {
-                                orderDetails: orderDetailsId,
-                                order: orderId,
-                                product: carts[i].product.productId
-                            },
-                            order: {
-                                orderId: orderId
-                            },
-                            product: {
+                                optionId: options[j].optionId,
+                                orderDetailsId: orderDetailsId,
+                                orderId: orderId,
                                 productId: carts[i].product.productId
                             },
-                            option: {
-                                optionId: options[j].optionId
-                            },
-                            quantity: carts[i].quantity,
-                            unitPriceProduct: carts[i].product.unitPrice,
-                            unitPriceOption: options[j].unitPrice,
-                            note: carts[i].note
+                            unitPrice: options[j].unitPrice
                         }, {
                             headers: {
                                 'Authorization': 'Bearer ' + user.token

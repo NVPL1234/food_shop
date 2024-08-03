@@ -1,16 +1,18 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Nav from "../component/Nav"
 import Footer from "../component/Footer"
 import "./Payment.css"
 import { url } from "../url"
+import { removeAll } from "../redux/cartSlice"
 
 export default function Payment() {
 
     const user = useSelector((state) => state.user.value)
     const carts = useSelector((state) => state.cart.value)
     const total = useSelector((state) => state.cart.total)
+    const dispatch = useDispatch()
     const [customer, setCustomer] = useState({})
     const [payMethod, setPayMethod] = useState(0)
 
@@ -35,6 +37,57 @@ export default function Payment() {
     }
 
     let pay = async () => {
+        if (payMethod === 1) { 
+            try {
+                let res = await axios.post(url + 'orders', {
+                    orderStatus: 1,
+                    customer: {
+                        customerId: user.userId
+                    }
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + user.token
+                    }
+                })
+                let orderId = res.data.orderId
+                for (let i = 0; i < carts.length; i++) {
+                    let orderDetailsId = new Date().getTime()
+                    let options = carts[i].options
+                    await axios.post(url + 'orderDetails', {
+                        id: {
+                            orderDetailsId: orderDetailsId,
+                            orderId: orderId,
+                            productId: carts[i].product.productId
+                        },
+                        quantity: carts[i].quantity,
+                        unitPriceProduct: carts[i].product.unitPrice,
+                        note: carts[i].note
+                    }, {
+                        headers: {
+                            'Authorization': 'Bearer ' + user.token
+                        }
+                    })
+                    if (options.length > 0)
+                        for (let j = 0; j < options.length; j++)
+                            await axios.post(url + 'customs', {
+                                id: {
+                                    optionId: options[j].optionId,
+                                    orderDetailsId: orderDetailsId,
+                                    orderId: orderId,
+                                    productId: carts[i].product.productId
+                                },
+                                unitPrice: options[j].unitPrice
+                            }, {
+                                headers: {
+                                    'Authorization': 'Bearer ' + user.token
+                                }
+                            })
+                }
+            } catch (error) {
+                console.log(error.message);
+            }
+            dispatch(removeAll())
+        }
         if (payMethod === 2) {
             await axios.post(url + "payments?total=" + total, {}, {
                 headers: {

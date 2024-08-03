@@ -7,8 +7,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class OrderDetailsPK implements Serializable {
-
+public class CustomPK implements Serializable {
+	
+	@Column(name = "option_id")
+	private Long optionId;
+	
 	@Column(name = "order_details_id")
 	private Long orderDetailsId;
 	
@@ -17,6 +20,14 @@ public class OrderDetailsPK implements Serializable {
 	
 	@Column(name = "product_id")
 	private Long productId;
+
+	public Long getOptionId() {
+		return optionId;
+	}
+
+	public void setOptionId(Long optionId) {
+		this.optionId = optionId;
+	}
 
 	public Long getOrderDetailsId() {
 		return orderDetailsId;
@@ -42,12 +53,12 @@ public class OrderDetailsPK implements Serializable {
 		this.productId = productId;
 	}
 
-	public OrderDetailsPK() {
+	public CustomPK() {
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(orderDetailsId, orderId, productId);
+		return Objects.hash(optionId, orderDetailsId, orderId, productId);
 	}
 
 	@Override
@@ -58,14 +69,14 @@ public class OrderDetailsPK implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		OrderDetailsPK other = (OrderDetailsPK) obj;
-		return Objects.equals(orderDetailsId, other.orderDetailsId) && Objects.equals(orderId, other.orderId)
-				&& Objects.equals(productId, other.productId);
+		CustomPK other = (CustomPK) obj;
+		return Objects.equals(optionId, other.optionId) && Objects.equals(orderDetailsId, other.orderDetailsId)
+				&& Objects.equals(orderId, other.orderId) && Objects.equals(productId, other.productId);
 	}
 
 	@Override
 	public String toString() {
-		return "OrderDetailsPK [orderDetailsId=" + orderDetailsId + ", orderId=" + orderId + ", productId=" + productId
-				+ "]";
+		return "CustomPK [optionId=" + optionId + ", orderDetailsId=" + orderDetailsId + ", orderId=" + orderId
+				+ ", productId=" + productId + "]";
 	}
 }
