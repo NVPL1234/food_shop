@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,9 +28,9 @@ public class ProductController {
 		return productService.findAll(pageNumber);
 	}
 	
-	@GetMapping("/products/count")
-	public long count() {
-		return productService.count();
+	@GetMapping("/products/id")
+	public Product findById(@RequestParam Long id) {
+		return productService.findById(id);
 	}
 	
 	@GetMapping("/productAndProductCategoies")
@@ -38,5 +41,20 @@ public class ProductController {
 	@GetMapping("/products/option")
 	public List<OptionDTO> getOptions(@RequestParam Long productId) {
 		return productService.getOptions(productId);
+	}
+	
+	@PostMapping("/products")
+	public Product save(@RequestBody Product product) {
+		return productService.save(product);
+	}
+	
+	@DeleteMapping("/products")
+	public void deleteById(@RequestParam Long id) {
+		productService.deleteById(id);
+	}
+	
+	@GetMapping("/products/count")
+	public long count() {
+		return productService.count();
 	}
 }

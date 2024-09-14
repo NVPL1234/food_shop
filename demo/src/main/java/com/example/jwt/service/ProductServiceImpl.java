@@ -1,6 +1,7 @@
 package com.example.jwt.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,17 +40,18 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product findById(Long id) {
-		return null;
+		Optional<Product> result = productRepository.findById(id);
+		return result.get();
 	}
 
 	@Override
 	public Product save(Product product) {
-		return null;
+		return productRepository.save(product);
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		
+		productRepository.deleteById(id);
 	}
 
 	@Override

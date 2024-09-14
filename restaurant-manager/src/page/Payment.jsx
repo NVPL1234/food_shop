@@ -6,6 +6,7 @@ import Footer from "../component/Footer"
 import "./Payment.css"
 import { url } from "../url"
 import { removeAll } from "../redux/cartSlice"
+import { useNavigate } from "react-router-dom"
 
 export default function Payment() {
 
@@ -15,6 +16,7 @@ export default function Payment() {
     const dispatch = useDispatch()
     const [customer, setCustomer] = useState({})
     const [payMethod, setPayMethod] = useState(0)
+    const navigate = useNavigate()
 
     let getData = async () => {
         await axios.get(url + "customers?customerId=" + user.userId, {
@@ -38,6 +40,7 @@ export default function Payment() {
 
     let pay = async () => {
         if (payMethod === 1) { 
+            let orderId
             try {
                 let res = await axios.post(url + 'orders', {
                     orderStatus: 1,
@@ -49,7 +52,7 @@ export default function Payment() {
                         'Authorization': 'Bearer ' + user.token
                     }
                 })
-                let orderId = res.data.orderId
+                orderId = res.data.orderId
                 for (let i = 0; i < carts.length; i++) {
                     let orderDetailsId = new Date().getTime()
                     let options = carts[i].options
@@ -87,6 +90,7 @@ export default function Payment() {
                 console.log(error.message);
             }
             dispatch(removeAll())
+            navigate("/order_success?orderId=" + orderId)
         }
         if (payMethod === 2) {
             await axios.post(url + "payments?total=" + total, {}, {

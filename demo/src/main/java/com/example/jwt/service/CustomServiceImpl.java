@@ -1,6 +1,7 @@
 package com.example.jwt.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,13 @@ public class CustomServiceImpl implements CustomService {
 
 	@Override
 	public List<Custom> findAll() {
-		return null;
+		return customRepository.findAll();
 	}
 
 	@Override
 	public Custom findById(CustomPK id) {
-		return null;
+		Optional<Custom> result = customRepository.findById(id);
+		return result.get();
 	}
 
 	@Override
@@ -32,5 +34,6 @@ public class CustomServiceImpl implements CustomService {
 
 	@Override
 	public void deleteById(CustomPK id) {
+		customRepository.deleteById(id);
 	}
 }
