@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.jwt.controller.PaymentController;
@@ -17,8 +21,10 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository orderRepository;
 	
 	@Override
-	public List<Order> findAll() {
-		return null;
+	public List<Order> findAll(int pageNumber) {
+		Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("orderId"));
+		Page<Order> result = orderRepository.findAll(pageable);
+		return result.toList();
 	}
 
 	@Override
@@ -37,5 +43,10 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public void deleteById(String id) {
+	}
+	
+	@Override
+	public long count() {
+		return orderRepository.count();
 	}
 }

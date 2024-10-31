@@ -43,7 +43,7 @@ export default function Home() {
                 {
                     products.map((product, i, arr) =>
                         <div className="col-6 col-sm-3 col-md-3" key={i}>
-                            {i == 0 ? <h5 className="row">{product.productCategoryName}</h5> : arr[i - 1].productCategoryName != product.productCategoryName && <h5 className="row">{product.productCategoryName}</h5>}
+                            {i == 0 ? <h5 className="row">{product.productCategoryName}</h5> : (arr[i - 1].productCategoryName != product.productCategoryName ? <h5 className="row">{product.productCategoryName}</h5> : <h5 className="row" style={{visibility: 'hidden'}}>.</h5>)}
                             <div className="row product" data-bs-toggle="modal" data-bs-target="#myModal" onClick={e => setProduct(product)}>
                                 <img src={product.imgPath} />
                                 <h5>{product.productName}</h5>

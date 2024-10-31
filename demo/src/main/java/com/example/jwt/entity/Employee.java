@@ -19,6 +19,9 @@ public class Employee {
 	@Column(name = "employee_id")
 	private Long employeeId;
 
+	@Column(name = "img_path", columnDefinition = "nvarchar(255)")
+	private String imgPath;
+	
 	@Column(name = "employee_name", columnDefinition = "nvarchar(50)")
 	private String employeeName;
 
@@ -43,6 +46,14 @@ public class Employee {
 
 	public void setEmployeeId(Long employeeId) {
 		this.employeeId = employeeId;
+	}
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 
 	public String getEmployeeName() {
@@ -88,9 +99,10 @@ public class Employee {
 	public Employee() {
 	}
 
-	public Employee(Long employeeId, String employeeName, String phoneNumber, String address, String idCardNumber,
-			User user) {
+	public Employee(Long employeeId, String imgPath, String employeeName, String phoneNumber, String address,
+			String idCardNumber, User user) {
 		this.employeeId = employeeId;
+		this.imgPath = imgPath;
 		this.employeeName = employeeName;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
@@ -100,7 +112,8 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", employeeName=" + employeeName + ", phoneNumber=" + phoneNumber
-				+ ", address=" + address + ", idCardNumber=" + idCardNumber + ", user=" + user + "]";
+		return "Employee [employeeId=" + employeeId + ", imgPath=" + imgPath + ", employeeName=" + employeeName
+				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", idCardNumber=" + idCardNumber + ", user="
+				+ user + "]";
 	}
 }

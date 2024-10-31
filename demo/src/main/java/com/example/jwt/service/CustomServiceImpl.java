@@ -36,4 +36,9 @@ public class CustomServiceImpl implements CustomService {
 	public void deleteById(CustomPK id) {
 		customRepository.deleteById(id);
 	}
+	
+	@Override
+	public long count() {
+		return customRepository.count();
+	}
 }

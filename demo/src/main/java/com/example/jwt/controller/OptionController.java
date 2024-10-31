@@ -22,8 +22,8 @@ public class OptionController {
 	private OptionService optionService;
 	
 	@GetMapping("/options")
-	public List<Option> findAll() {
-		return optionService.findAll();
+	public List<Option> findAll(@RequestParam int pageNumber) {
+		return optionService.findAll(pageNumber);
 	}
 	
 	@GetMapping("/options/id")
@@ -39,5 +39,10 @@ public class OptionController {
 	@DeleteMapping("/options")
 	public void deleteById(@RequestParam Long id) {
 		optionService.deleteById(id);
+	}
+	
+	@GetMapping("/options/count")
+	public long count() {
+		return optionService.count();
 	}
 }

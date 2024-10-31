@@ -26,6 +26,11 @@ public class ProductCategoryController {
 		return productCategoryService.findAll();
 	}
 	
+	@GetMapping("/productCategories/pageNumber")
+	public List<ProductCategory> findAll(@RequestParam int pageNumber) {
+		return productCategoryService.findAll(pageNumber);
+	}
+	
 	@GetMapping("/productCategories/id")
 	public ProductCategory findById(@RequestParam Long id) {
 		return productCategoryService.findById(id);
@@ -39,5 +44,10 @@ public class ProductCategoryController {
 	@DeleteMapping("/productCategories")
 	public void deleteById(@RequestParam Long id) {
 		productCategoryService.deleteById(id);
+	}
+	
+	@GetMapping("/productCategories/count")
+	public long count() {
+		return productCategoryService.count();
 	}
 }

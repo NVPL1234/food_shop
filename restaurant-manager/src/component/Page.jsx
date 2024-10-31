@@ -1,153 +1,488 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../redux/pageNumberSlice'
 import { GrPrevious, GrNext } from "react-icons/gr"
-import axios from "axios"
-import { url } from "../url"
+import { update } from '../redux/activePageSlice'
 
-export default function Page() {
+export default function Page(prop) {
 
-    // const pageNumber = prop.pageNumber
-    // const setPageNumber = prop.setPageNumber
-    const token = useSelector((state) => state.user.value.token)
-    const pageNumber = useSelector((state) => state.pageNumber.value)
+    const getData = prop.getData
+    const hidden = prop.hidden
+    const totalPage = prop.totalPage
+    const activePage = useSelector((state) => state.activePage.value)
     const dispatch = useDispatch()
-    const [totalProduct, setTotalProduct] = useState(0)
     const [buttons, setButtons] = useState([])
-    const [active, setActive] = useState(1)
-    const [disabled, setDisabled] = useState(false)
-
-    let countProduct = async () => {
-        await axios.get(url + "products/count", {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        })
-            .then(res => {
-                let totalProduct = res.data
-                let totalPage = Math.ceil(totalProduct / 10)
-                switch (totalPage) {
-                    case 1:
-                        setButtons([
-                            {
-                                text: 1
-                            }
-                        ])
-                        setDisabled(true)
-                        break;
-                    case 2:
-                        setButtons([
-                            {
-                                text: 1
-                            },
-                            {
-                                text: 2
-                            }
-                        ])
-                        setDisabled(true)
-                        break;
-                    case 3:
-                        setButtons([
-                            {
-                                text: 1  
-                            }, 
-                            {
-                                text: 2
-                            },
-                            {
-                                text: 3
-                            }
-                        ])
-                        setDisabled(true)
-                        break;
-                    default:
-                        setButtons([
-                            {
-                                text: 1
-                            }, 
-                            {
-                                text: 2
-                            },
-                            {
-                                text: 3
-                            }
-                        ])
-                        break;
-                }
-                setTotalProduct(totalProduct)
-            })
-            .catch(e => console.log(e.message))
-    }
 
     let handlePreviousPage = () => {
-        // pageNumber >= 1 ? setPageNumber(pageNumber - 1) : setPageNumber(0)
-        // setButtons(...buttons, [
-        //     {
-        //         text: buttons[active - 1].text - 1
-        //     }
-        // ])
+        if (activePage == 1)
+            return
+        if (totalPage > 7) {
+            dispatch(update(activePage - 1))
+            getData(activePage - 2)
+            if (activePage > 4 && activePage == buttons[3].text)
+                setButtons([
+                    {
+                        text: buttons[0].text - 1
+                    },
+                    {
+                        text: buttons[1].text - 1
+                    },
+                    {
+                        text: buttons[2].text - 1
+                    },
+                    {
+                        text: buttons[3].text - 1
+                    },
+                    {
+                        text: buttons[4].text - 1
+                    },
+                    {
+                        text: buttons[5].text - 1
+                    },
+                    {
+                        text: '...'
+                    }
+                ])
+        }
+        else {
+            dispatch(update(activePage - 1))
+            getData(activePage - 2)
+        }
     }
 
     let handleChange = (button) => {
-        // setPageNumber(button.text - 1)
-        setActive(button.text)
+        if (button.text == '...')
+            return
+        if (button.text > buttons[3].text && button.text != totalPage) {
+            switch (totalPage - button.text) {
+                case 1:
+                    setButtons([
+                        {
+                            text: button.text - 5
+                        },
+                        {
+                            text: button.text - 4
+                        },
+                        {
+                            text: button.text - 3
+                        },
+                        {
+                            text: button.text - 2
+                        },
+                        {
+                            text: button.text - 1
+                        },
+                        {
+                            text: button.text
+                        },
+                        {
+                            text: button.text + 1
+                        }
+                    ])
+                    break;
+                case 2:
+                    setButtons([
+                        {
+                            text: button.text - 4
+                        },
+                        {
+                            text: button.text - 3
+                        },
+                        {
+                            text: button.text - 2
+                        },
+                        {
+                            text: button.text - 1
+                        },
+                        {
+                            text: button.text
+                        },
+                        {
+                            text: button.text + 1
+                        },
+                        {
+                            text: button.text + 2
+                        }
+                    ])
+                    break;
+                case 3:
+                    setButtons([
+                        {
+                            text: button.text - 3
+                        },
+                        {
+                            text: button.text - 2
+                        },
+                        {
+                            text: button.text - 1
+                        },
+                        {
+                            text: button.text
+                        },
+                        {
+                            text: button.text + 1
+                        },
+                        {
+                            text: button.text + 2
+                        },
+                        {
+                            text: button.text + 3
+                        }
+                    ])
+                    break;
+                default:
+                    setButtons([
+                        {
+                            text: button.text - 3
+                        },
+                        {
+                            text: button.text - 2
+                        },
+                        {
+                            text: button.text - 1
+                        },
+                        {
+                            text: button.text
+                        },
+                        {
+                            text: button.text + 1
+                        },
+                        {
+                            text: button.text + 2
+                        },
+                        {
+                            text: '...'
+                        }
+                    ])
+                    break;
+            }
+        }
+        else if (button.text < buttons[3].text && button.text > 1) {
+            switch (button.text - 1) {
+                case 1:
+                    setButtons([
+                        {
+                            text: button.text - 1
+                        },
+                        {
+                            text: button.text
+                        },
+                        {
+                            text: button.text + 1
+                        },
+                        {
+                            text: button.text + 2
+                        },
+                        {
+                            text: button.text + 3
+                        },
+                        {
+                            text: button.text + 4
+                        },
+                        {
+                            text: '...'
+                        }
+                    ])
+                    break;
+                case 2:
+                    setButtons([
+                        {
+                            text: button.text - 2
+                        },
+                        {
+                            text: button.text - 1
+                        },
+                        {
+                            text: button.text
+                        },
+                        {
+                            text: button.text + 1
+                        },
+                        {
+                            text: button.text + 2
+                        },
+                        {
+                            text: button.text + 3
+                        },
+                        {
+                            text: '...'
+                        }
+                    ])
+                    break;
+                case 3:
+                    setButtons([
+                        {
+                            text: button.text - 3
+                        },
+                        {
+                            text: button.text - 2
+                        },
+                        {
+                            text: button.text - 1
+                        },
+                        {
+                            text: button.text
+                        },
+                        {
+                            text: button.text + 1
+                        },
+                        {
+                            text: button.text + 2
+                        },
+                        {
+                            text: '...'
+                        }
+                    ])
+                    break;
+                default:
+                    setButtons([
+                        {
+                            text: button.text - 3
+                        },
+                        {
+                            text: button.text - 2
+                        },
+                        {
+                            text: button.text - 1
+                        },
+                        {
+                            text: button.text
+                        },
+                        {
+                            text: button.text + 1
+                        },
+                        {
+                            text: button.text + 2
+                        },
+                        {
+                            text: '...'
+                        }
+                    ])
+                    break;
+            }
+        }
+        dispatch(update(button.text))
+        getData(button.text - 1)
     }
 
     let handleNextPage = () => {
-        // dispatch(increment())
-        console.log(active);
-        let totalPage = Math.ceil(totalProduct / 10)
-        if (totalPage - pageNumber == 1) {
-            setDisabled(true)
-            return
-        }
-        else if (totalPage - pageNumber <= 3) {
-            dispatch(increment())
-            setActive(active + 1)
-            setButtons([
-                {
-                    text: buttons[0].text,
-                },
-                {
-                    text: buttons[1].text
-                },
-                {
-                    text: buttons[2].text
+        if (totalPage > 7) {
+            if (activePage == totalPage)
+                return
+            dispatch(update(activePage + 1))
+            getData(activePage)
+            if (activePage > 3) {
+                if (activePage + 4 == totalPage) {
+                    setButtons([
+                        {
+                            text: buttons[0].text + 1
+                        },
+                        {
+                            text: buttons[1].text + 1
+                        },
+                        {
+                            text: buttons[2].text + 1
+                        },
+                        {
+                            text: buttons[3].text + 1
+                        },
+                        {
+                            text: buttons[4].text + 1
+                        },
+                        {
+                            text: buttons[5].text + 1
+                        },
+                        {
+                            text: totalPage
+                        }
+                    ])
                 }
-            ])
-        }
-        else if (pageNumber < totalPage) {
-            dispatch(increment())
-            setActive(active + 1)
-            setButtons([
-                {
-                    text: buttons[1].text
-                },
-                {
-                    text: buttons[2].text
-                },
-                {
-                    text: buttons[2].text + 1
+                else if (buttons[buttons.length - 1].text == '...') {
+                    setButtons([
+                        {
+                            text: buttons[0].text + 1
+                        },
+                        {
+                            text: buttons[1].text + 1
+                        },
+                        {
+                            text: buttons[2].text + 1
+                        },
+                        {
+                            text: buttons[3].text + 1
+                        },
+                        {
+                            text: buttons[4].text + 1
+                        },
+                        {
+                            text: buttons[5].text + 1
+                        },
+                        {
+                            text: '...'
+                        }
+                    ])
                 }
-            ])
+            }
         }
-        else
-            alert("het danh sach!")
+        else {
+            if (activePage == totalPage)
+                return
+            dispatch(update(activePage + 1))
+            getData(activePage)
+        }
     }
 
-    useEffect(() => {
-        countProduct()
-    }, [])
+    useEffect(() => {        
+        dispatch(update(1))
+        switch (totalPage) {
+            case 1:
+                setButtons([
+                    {
+                        text: 1
+                    }
+                ])
+                break;
+            case 2:
+                setButtons([
+                    {
+                        text: 1
+                    },
+                    {
+                        text: 2
+                    }
+                ])
+                break;
+            case 3:
+                setButtons([
+                    {
+                        text: 1
+                    },
+                    {
+                        text: 2
+                    },
+                    {
+                        text: 3
+                    }
+                ])
+                break;
+            case 4:
+                setButtons([
+                    {
+                        text: 1
+                    },
+                    {
+                        text: 2
+                    },
+                    {
+                        text: 3
+                    },
+                    {
+                        text: 4
+                    }
+                ])
+                break;
+            case 5:
+                setButtons([
+                    {
+                        text: 1
+                    },
+                    {
+                        text: 2
+                    },
+                    {
+                        text: 3
+                    },
+                    {
+                        text: 4
+                    },
+                    {
+                        text: 5
+                    }
+                ])
+                break;
+            case 6:
+                setButtons([
+                    {
+                        text: 1
+                    },
+                    {
+                        text: 2
+                    },
+                    {
+                        text: 3
+                    },
+                    {
+                        text: 4
+                    },
+                    {
+                        text: 5
+                    },
+                    {
+                        text: 6
+                    }
+                ])
+                break;
+            case 7:
+                setButtons([
+                    {
+                        text: 1
+                    },
+                    {
+                        text: 2
+                    },
+                    {
+                        text: 3
+                    },
+                    {
+                        text: 4
+                    },
+                    {
+                        text: 5
+                    },
+                    {
+                        text: 6
+                    },
+                    {
+                        text: 7
+                    }
+                ])
+                break;
+            default:
+                setButtons([
+                    {
+                        text: 1
+                    },
+                    {
+                        text: 2
+                    },
+                    {
+                        text: 3
+                    },
+                    {
+                        text: 4
+                    },
+                    {
+                        text: 5
+                    },
+                    {
+                        text: 6
+                    },
+                    {
+                        text: '...'
+                    }
+                ])
+                break;
+        }
+    }, [totalPage])
 
     return (
-        <div className="row mt-3 page-num">
+        <div className="row mt-3 page-num" hidden={hidden}>
             <button type="button" className="col-md-1 shadow-sm" onClick={e => handlePreviousPage()}><GrPrevious /></button>
             {
                 buttons.map(button =>
-                    <button key={button.text} type="button" className={active == button.text ? "col-md-1 shadow-sm active" : "col-md-1 shadow-sm"} onClick={e => handleChange(button)}>{button.text}</button>
+                    <button key={button.text} type="button" className={activePage == button.text ? "col-md-1 shadow-sm active" : "col-md-1 shadow-sm"} onClick={e => handleChange(button)}>{button.text}</button>
                 )
             }
-            <button type="button" className="col-md-1 shadow-sm" onClick={e => handleNextPage()} disabled={disabled}><GrNext /></button>
+            <button type="button" className="col-md-1 shadow-sm" onClick={e => handleNextPage()}><GrNext /></button>
         </div>
     )
 }

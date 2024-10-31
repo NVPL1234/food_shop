@@ -10,4 +10,5 @@ public interface CustomService {
 	public Custom findById(CustomPK id);
 	public Custom save(Custom custom);
 	public void deleteById(CustomPK id);
+	public long count();
 }

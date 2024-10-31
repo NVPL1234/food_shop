@@ -32,8 +32,10 @@ export default function Nav() {
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Sản phẩm</a>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Cập nhật loại sản phẩm</a></li>
+                                    <li><Link className="dropdown-item" to="/update_product_category">Cập nhật loại sản phẩm</Link></li>
                                     <li><Link className="dropdown-item" to="/update_product">Cập nhật sản phẩm</Link></li>
+                                    <li><Link className="dropdown-item" to="/update_option_category">Cập nhật loại tuỳ chọn</Link></li>
+                                    <li><Link className="dropdown-item" to="/update_option">Cập nhật tuỳ chọn</Link></li>
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
@@ -45,13 +47,13 @@ export default function Nav() {
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Khách hàng</a>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Cập nhật khách hàng</a></li>
+                                    <li><Link className="dropdown-item" to="/update_customer">Cập nhật khách hàng</Link></li>
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Nhân viên</a>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Cập nhật nhân viên</a></li>
+                                    <li><Link className="dropdown-item" to="/update_employee">Cập nhật nhân viên</Link></li>
                                     <li><a className="dropdown-item" href="#">Gọi món</a></li>
                                 </ul>
                             </li>

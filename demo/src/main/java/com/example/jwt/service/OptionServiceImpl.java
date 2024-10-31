@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.jwt.entity.Option;
@@ -16,8 +20,10 @@ public class OptionServiceImpl implements OptionService {
 	private OptionRepository optionRepository;
 
 	@Override
-	public List<Option> findAll() {
-		return optionRepository.findAll();
+	public List<Option> findAll(int pageNumber) {
+		Pageable pageable = PageRequest.of(pageNumber, 10, Sort.by("optionId"));
+		Page<Option> result = optionRepository.findAll(pageable);
+		return result.toList();
 	}
 
 	@Override
@@ -34,5 +40,10 @@ public class OptionServiceImpl implements OptionService {
 	@Override
 	public void deleteById(Long id) {
 		optionRepository.deleteById(id);
+	}
+	
+	@Override
+	public long count() {
+		return optionRepository.count();
 	}
 }

@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import pageNumberReducer from './pageNumberSlice'
+import activePageReducer from './activePageSlice'
 import userReducer from './userSlice'
 import cartReducer from './cartSlice'
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
@@ -7,11 +7,12 @@ import storage from 'redux-persist/lib/storage'
 
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
+  blacklist: ["activePage"],
 }
 
 const rootReducer = combineReducers({
-  pageNumber: pageNumberReducer, 
+  activePage: activePageReducer, 
   user: userReducer,
   cart: cartReducer
 })

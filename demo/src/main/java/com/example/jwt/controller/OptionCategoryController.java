@@ -26,6 +26,11 @@ public class OptionCategoryController {
 		return optionCategoryService.findAll();
 	}
 	
+	@GetMapping("/optionCategories/pageNumber")
+	public List<OptionCategory> findAll(@RequestParam int pageNumber) {
+		return optionCategoryService.findAll(pageNumber);
+	}
+	
 	@GetMapping("/optionCategories/id")
 	public OptionCategory findById(@RequestParam Long id) {
 		return optionCategoryService.findById(id);
@@ -39,5 +44,10 @@ public class OptionCategoryController {
 	@DeleteMapping("/optionCategories")
 	public void deleteById(@RequestParam Long id) {
 		optionCategoryService.deleteById(id);
+	}
+	
+	@GetMapping("/optionCategories/count")
+	public long count() {
+		return optionCategoryService.count();
 	}
 }

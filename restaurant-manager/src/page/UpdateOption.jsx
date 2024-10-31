@@ -7,27 +7,27 @@ import { GoPencil } from "react-icons/go";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import Nav from "../component/Nav"
 import Page from "../component/Page"
-import CustomerForm from '../component/CustomerForm'
+import OptionForm from '../component/OptionForm'
 import "./UpdateProduct.css"
 
-export default function UpdateCustomer() {
+export default function UpdateOption() {
 
     const token = useSelector((state) => state.user.value.token)
     const [hidden, setHidden] = useState(false)
     const activePage = useSelector((state) => state.activePage.value)
     const [totalPage, setTotalPage] = useState(0)
-    const [customers, setCustomers] = useState([])
-    const [customer, setCustomer] = useState(null)
-    const [customerId, setCustomerId] = useState(0)
+    const [options, setOptions] = useState([])
+    const [option, setOption] = useState(null)
+    const [optionId, setOptionId] = useState(0)
 
     let getData = async (pageNumber) => {
         try {
-            let res = await axios.get(url + "customers?pageNumber=" + pageNumber, {
+            let res = await axios.get(url + "options?pageNumber=" + pageNumber, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
-            setCustomers(res.data)
+            setOptions(res.data)
         } catch (e) {
             console.log(e.message)
         }
@@ -35,15 +35,15 @@ export default function UpdateCustomer() {
 
     let findById = async () => {
         try {
-            let res = await axios.get(url + "customers/id?id=" + customerId, {
+            let res = await axios.get(url + "options/id?id=" + optionId, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
-            setCustomers(res.data)
+            setOptions(res.data)
         } catch (e) {
             alert("Không tìm thấy!")
-            setCustomers([])
+            setOptions([])
         }
         setHidden(true)
     }
@@ -52,7 +52,7 @@ export default function UpdateCustomer() {
         if (!(window.confirm('Bạn có chắc muốn xoá?')))
             return false
         try {
-            await axios.delete(url + "customers?id=" + id, {
+            await axios.delete(url + "options?id=" + id, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
@@ -65,14 +65,14 @@ export default function UpdateCustomer() {
     }
 
     let count = async () => {
-        await axios.get(url + "customers/count", {
+        await axios.get(url + "options/count", {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         })
             .then(res => {
-                let totalCustomer = res.data
-                let totalPage = Math.ceil(totalCustomer / 10)
+                let totalOption = res.data
+                let totalPage = Math.ceil(totalOption / 10)
                 setTotalPage(totalPage)
             })
             .catch(e => console.log(e.message))
@@ -87,32 +87,32 @@ export default function UpdateCustomer() {
         <div className="container-fluid">
             <Nav />
             <div className="row mt-3">
-                <button type="button" className="col-md-1 btn btn-primary me-2" onClick={e => setCustomer(null)} data-bs-toggle="modal" data-bs-target="#myModal">THÊM</button>
-                <input type="text" className="col-md txt-product-id me-2" placeholder="Mã khách hàng..." value={customerId} onChange={e => setCustomerId(e.target.value)} />
+                <button type="button" className="col-md-1 btn btn-primary me-2" onClick={e => setOption(null)} data-bs-toggle="modal" data-bs-target="#myModal">THÊM</button>
+                <input type="text" className="col-md txt-product-id me-2" placeholder="Mã khách hàng..." value={optionId} onChange={e => setOptionId(e.target.value)} />
                 <button type="button" className="col-md-1 btn btn-success me-2" onClick={e => findById()}><TfiSearch /></button>
             </div>
             <div className="row mt-3 table-responsive-md">
                 <table className="table">
                     <thead>
                         <tr>
-                            <th>Mã khách hàng</th>
-                            <th>Tên khách hàng</th>
-                            <th>Số điện thoại</th>
-                            <th>Địa chỉ</th>
+                            <th>Mã tuỳ chọn</th>
+                            <th>Tên tuỳ chọn</th>
+                            <th>Đơn giá</th>
+                            <th>Loại tuỳ chọn</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
-                            customers.map(customer =>
-                                <tr key={customer.customerId}>
-                                    <td>{customer.customerId}</td>
-                                    <td>{customer.customerName}</td>
-                                    <td>{customer.phoneNumber}</td>
-                                    <td>{customer.address}</td>
+                            options.map(option =>
+                                <tr key={option.optionId}>
+                                    <td>{option.optionId}</td>
+                                    <td>{option.optionName}</td>
+                                    <td>{option.unitPrice}</td>
+                                    <td>{option.optionCategory.optionCategoryName}</td>
                                     <td>
-                                        <GoPencil className="i-edit" onClick={e => setCustomer(customer)} data-bs-toggle="modal" data-bs-target="#myModal" /> |
-                                        <MdOutlineDeleteOutline size={25} className="i-delete" data-bs-toggle="tooltip" title="Xoá" onClick={e => deleteById(customer.customerId)} />
+                                        <GoPencil className="i-edit" onClick={e => setOption(option)} data-bs-toggle="modal" data-bs-target="#myModal" /> |
+                                        <MdOutlineDeleteOutline size={25} className="i-delete" data-bs-toggle="tooltip" title="Xoá" onClick={e => deleteById(option.optionId)} />
                                     </td>
                                 </tr>
                             )
@@ -127,12 +127,12 @@ export default function UpdateCustomer() {
                     <div className="modal-content">
 
                         <div className="modal-header">
-                            <h4 className="modal-title">Khách hàng</h4>
+                            <h4 className="modal-title">Tuỳ chọn</h4>
                             <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
                         </div>
 
                         <div className="modal-body">
-                            {customer != null ? <CustomerForm customer={customer} getData={getData} /> : <CustomerForm getData={getData} />}
+                            {option != null ? <OptionForm option={option} getData={getData} /> : <OptionForm getData={getData} />}
                         </div>
                     </div>
                 </div>
