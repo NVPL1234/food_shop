@@ -42,7 +42,10 @@ public class CustomPK implements Serializable {
 	}
 
 	public void setOrderId(String orderId) {
-		this.orderId = orderId;
+		if(orderId == null)
+			this.orderId = "";
+		else
+			this.orderId = orderId;
 	}
 
 	public Long getProductId() {

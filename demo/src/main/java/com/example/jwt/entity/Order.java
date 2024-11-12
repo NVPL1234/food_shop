@@ -1,6 +1,6 @@
 package com.example.jwt.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.hibernate.annotations.ColumnDefault;
 
@@ -19,9 +19,9 @@ public class Order {
 	@Column(name = "order_id")
 	private String orderId;
 
-	@Column(name = "order_date")
+	@Column(name = "order_date", columnDefinition = "DATE")
 	@ColumnDefault(value = "CURRENT_TIMESTAMP")
-	private Date orderDate = new Date();
+	private Date orderDate;
 
 	@Column(name = "order_status")
 	private int orderStatus;

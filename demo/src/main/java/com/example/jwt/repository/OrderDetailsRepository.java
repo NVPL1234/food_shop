@@ -7,6 +7,6 @@ import com.example.jwt.entity.OrderDetails;
 import com.example.jwt.entity.OrderDetailsPK;
 
 @Repository
-public interface OrderDetailsRepository extends JpaRepository<OrderDetails, OrderDetailsPK> {
+public interface OrderDetailsRepository extends JpaRepository<OrderDetails, OrderDetailsPK>, OrderDetailsRepositoryCustom {
 
 }

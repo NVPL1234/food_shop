@@ -36,16 +36,16 @@ export default function UpdateEmployee() {
     }
 
     let findById = async () => {
+        setEmployee([])
         try {
             let res = await axios.get(url + "employees/id?id=" + employeeId, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
-            setEmployee(res.data)
+            setEmployee(e => [...e, res.data])
         } catch (e) {
             alert("Không tìm thấy!")
-            setEmployee([])
         }
         setHidden(true)
     }

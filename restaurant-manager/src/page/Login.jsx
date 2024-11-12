@@ -21,9 +21,12 @@ export default function Login() {
                 username: phoneNum,
                 password: password
             })
-            console.log(res.data.token);
             dispatch(save(res.data))
-            navigate("/")
+            let user = res.data
+            if(user.roleId == 1)
+                navigate("/")
+            else
+                navigate("/dashboard")
         } catch (error) {
             console.log(error.message);
             alert(error.message)

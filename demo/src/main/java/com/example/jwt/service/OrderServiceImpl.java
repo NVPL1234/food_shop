@@ -1,5 +1,6 @@
 package com.example.jwt.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.jwt.controller.PaymentController;
 import com.example.jwt.entity.Order;
+import com.example.jwt.reponse.ReponseRevenue;
 import com.example.jwt.repository.OrderRepository;
 
 @Service
@@ -19,6 +21,16 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
 	private OrderRepository orderRepository;
+	
+	@Override
+	public List<Order> findBy(String orderDate, Long customerId) {
+		return orderRepository.findBy(orderDate, customerId);
+	}
+	
+	@Override
+	public List<Order> findByOrderDate(Date orderDate) {
+		return orderRepository.findByOrderDate(orderDate);
+	}
 	
 	@Override
 	public List<Order> findAll(int pageNumber) {
@@ -48,5 +60,15 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public long count() {
 		return orderRepository.count();
+	}
+
+	@Override
+	public List<ReponseRevenue> getRevenue(int dayNum) {
+		return orderRepository.getRevenue(dayNum);
+	}
+
+	@Override
+	public List<ReponseRevenue> getRevenue(String firstDay, String lastDay) {
+		return orderRepository.getRevenue(firstDay, lastDay);
 	}
 }

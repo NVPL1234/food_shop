@@ -5,23 +5,24 @@ import { url } from "../url"
 import { socket } from '../socket'
 import Nav from '../component/Nav'
 import OrderDetails from "../component/OrderDetails"
-import "./UpdateProduct.css"
+import Footer from '../component/Footer'
+import { TfiSearch } from 'react-icons/tfi'
 
-export default function UpdateOrder() {
+export default function OrderHistory() {
 
     const user = useSelector((state) => state.user.value)
     const [day, setDay] = useState(new Date().toJSON().slice(0, 10))
     const [orders, setOrders] = useState([])
-    const [orderId, setOrderId] = useState('')    
+    const [orderId, setOrderId] = useState('')
 
     let getData = async () => {
         try {
-            let res = await axios.get(url + 'orders/date?orderDate=' + day, {
+            let res = await axios.get(url + 'orders/customer?orderDate=' + day + '&customerId=' + user.userId, {
                 headers: {
                     'Authorization': 'Bearer ' + user.token
                 }
             })
-            setOrders(res.data)            
+            setOrders(res.data)
         } catch (e) {
             console.log(e.message)
         }
@@ -41,24 +42,6 @@ export default function UpdateOrder() {
                 return 'Đã huỷ'
             default:
                 break
-        }
-    }
-
-    let updateStatus = async (order, status) => {
-        try {
-            await axios.post(url + 'orders', {
-                orderId: order.orderId,
-                orderDate: order.orderDate,
-                orderStatus: status,
-                customer: order.customer
-            }, {
-                headers: {
-                    'Authorization': 'Bearer ' + user.token
-                }
-            })
-            
-        } catch (e) {
-            console.log(e.message)
         }
     }
 
@@ -86,21 +69,15 @@ export default function UpdateOrder() {
                             <th>Mã hoá đơn</th>
                             <th>Ngày đặt hàng</th>
                             <th>Trạng thái</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             orders.map(order =>
-                                <tr key={order.orderId}>
+                                <tr key={order.orderId} data-bs-toggle="modal" data-bs-target="#myModal" onClick={e => setOrderId(order.orderId)}>
                                     <td>{order.orderId}</td>
                                     <td>{order.orderDate}</td>
                                     <td>{handleStatus(order.orderStatus)}</td>
-                                    <td>
-                                        <button type="button" className="btn btn-success" onClick={e => updateStatus(order, 3)} disabled={order.orderStatus >= 3 ? true : false}>Chấp nhận</button> | &nbsp;
-                                        <button type="button" className="btn btn-danger" onClick={e => updateStatus(order, 5)} disabled={order.orderStatus == 5 ? true : false}>Huỷ</button> | &nbsp;
-                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onClick={e => setOrderId(order.orderId)}>Xem chi tiết</button>
-                                    </td>
                                 </tr>
                             )
                         }
@@ -108,6 +85,7 @@ export default function UpdateOrder() {
                 </table>
             </div>
             <OrderDetails orderId={orderId} />
+            <Footer />
         </div>
     )
 }

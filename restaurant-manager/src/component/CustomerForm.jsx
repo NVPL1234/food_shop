@@ -16,10 +16,11 @@ export default function CustomerForm(prop) {
     let save = async () => {
         try {
             await axios.post(url + 'customers', {
-                customerId: customer != null ? customer.customerId : 0,
+                customerId: customer != null ? customer.customerId : null,
                 customerName: customerName,
                 phoneNumber: phoneNumber,
-                address: address
+                address: address,
+                createDate: customer != null ? customer.createDate : new Date().toISOString()
             }, {
                 headers: {
                     'Authorization': 'Bearer ' + token

@@ -37,7 +37,7 @@ export default function EmployeeForm(prop) {
                 .then(async (imgPath) => {
                     try {
                         await axios.post(url + 'employees', {
-                            employeeId: employee != null ? employee.employeeId : 0,
+                            employeeId: employee != null ? employee.employeeId : null,
                             imgPath: imgPath,
                             employeeName: employeeName,
                             phoneNumber: phoneNumber,
@@ -77,7 +77,7 @@ export default function EmployeeForm(prop) {
         else {
             try {
                 await axios.post(url + 'employees', {
-                    employeeId: employee != null ? employee.employeeId : 0,
+                    employeeId: employee != null ? employee.employeeId : null,
                     imgPath: imgPath,
                     employeeName: employeeName,
                     phoneNumber: phoneNumber,

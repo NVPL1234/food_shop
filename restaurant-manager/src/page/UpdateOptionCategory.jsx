@@ -34,16 +34,16 @@ export default function UpdateOptionCategory() {
     }
 
     let findById = async () => {
+        setOptionCategories([])
         try {
             let res = await axios.get(url + "optionCategories/id?id=" + optionCategoryId, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
-            setOptionCategories(res.data)
+            setOptionCategories(oc => [...oc, res.data])
         } catch (e) {
             alert("Không tìm thấy!")
-            setOptionCategories([])
         }
         setHidden(true)
     }

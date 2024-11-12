@@ -10,4 +10,5 @@ public interface CustomerService {
 	public Customer save(Customer customer);
 	public void deleteById(Long id);
 	public long count();
+	public long countNewCustomer();
 }

@@ -1,5 +1,8 @@
 package com.example.jwt.entity;
 
+import java.sql.Date;
+
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -27,6 +30,10 @@ public class Customer {
 
 	@Column(columnDefinition = "nvarchar(255)")
 	private String address;
+	
+	@Column(name = "create_date", columnDefinition = "DATE")
+	@ColumnDefault(value = "CURRENT_TIMESTAMP")
+	private Date createDate;
 
 	@OneToOne
 	@MapsId
@@ -66,6 +73,14 @@ public class Customer {
 		this.address = address;
 	}
 
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -77,17 +92,19 @@ public class Customer {
 	public Customer() {
 	}
 
-	public Customer(Long customerId, String customerName, String phoneNumber, String address, User user) {
+	public Customer(Long customerId, String customerName, String phoneNumber, String address, Date createDate,
+			User user) {
 		this.customerId = customerId;
 		this.customerName = customerName;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
+		this.createDate = createDate;
 		this.user = user;
 	}
 
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", phoneNumber=" + phoneNumber
-				+ ", address=" + address + ", user=" + user + "]";
+				+ ", address=" + address + ", createDate=" + createDate + ", user=" + user + "]";
 	}
 }

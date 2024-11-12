@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.jwt.dto.OrderDetailsDTO;
 import com.example.jwt.entity.OrderDetails;
 import com.example.jwt.entity.OrderDetailsPK;
 import com.example.jwt.repository.OrderDetailsRepository;
@@ -14,6 +15,11 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
 	@Autowired
 	private OrderDetailsRepository orderDetailsRepository;
+	
+	@Override
+	public List<OrderDetailsDTO> findBy(String orderId) {
+		return orderDetailsRepository.findBy(orderId);
+	}
 	
 	@Override
 	public List<OrderDetails> findAll() {

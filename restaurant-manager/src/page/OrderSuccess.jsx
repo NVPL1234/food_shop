@@ -19,7 +19,7 @@ export default function OrderSuccess() {
                 </div>
                 <h5 className='mt-3'>Đặt hàng thành công!</h5>
                 <p>Mã đơn hàng của bạn là <span style={{ color: 'blue' }}>{orderId}</span></p>
-                <p>Bạn có thể xem chi tiết trong đơn hàng của tôi</p>
+                <p>Bạn có thể xem chi tiết trong <Link to='/order_history'>lịch sử đơn hàng</Link></p>
                 <Link to="/" className='col-md-5 btn btn-primary'>TIẾP TỤC MUA HÀNG</Link>
             </div>
             <Footer />

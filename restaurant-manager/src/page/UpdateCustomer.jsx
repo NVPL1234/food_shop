@@ -34,16 +34,16 @@ export default function UpdateCustomer() {
     }
 
     let findById = async () => {
+        setCustomers([])
         try {
-            let res = await axios.get(url + "customers/id?id=" + customerId, {
+            let res = await axios.get(url + "customers/id?customerId=" + customerId, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
-            setCustomers(res.data)
+            setCustomers(c => [...c, res.data])
         } catch (e) {
-            alert("Không tìm thấy!")
-            setCustomers([])
+            alert("Không tìm thấy!")            
         }
         setHidden(true)
     }

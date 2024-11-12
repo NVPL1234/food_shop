@@ -33,7 +33,7 @@ public class OrderDetails {
 	
 	@Column(columnDefinition = "nvarchar(255)")
 	private String note;
-
+	
 	public OrderDetailsPK getId() {
 		return id;
 	}

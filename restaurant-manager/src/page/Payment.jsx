@@ -19,7 +19,7 @@ export default function Payment() {
     const navigate = useNavigate()
 
     let getData = async () => {
-        await axios.get(url + "customers?customerId=" + user.userId, {
+        await axios.get(url + "customers/id?customerId=" + user.userId, {
             headers: {
                 'Authorization': 'Bearer ' + user.token
             }
@@ -43,6 +43,7 @@ export default function Payment() {
             let orderId
             try {
                 let res = await axios.post(url + 'orders', {
+                    orderDate: new Date().toISOString(),
                     orderStatus: 1,
                     customer: {
                         customerId: user.userId

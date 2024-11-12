@@ -34,16 +34,16 @@ export default function UpdateOption() {
     }
 
     let findById = async () => {
+        setOptions([])
         try {
             let res = await axios.get(url + "options/id?id=" + optionId, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
-            setOptions(res.data)
+            setOptions(o => [...o, res.data])
         } catch (e) {
             alert("Không tìm thấy!")
-            setOptions([])
         }
         setHidden(true)
     }

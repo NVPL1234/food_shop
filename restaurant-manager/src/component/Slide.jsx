@@ -12,7 +12,7 @@ export default function Slide() {
 
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src="https://firebasestorage.googleapis.com/v0/b/restaurantmanager-b7f1b.appspot.com/o/hu_tiu_xa_xiu.jpg?alt=media&token=debc018f-28af-47d6-9e66-6e2d0a150d1a" alt="Los Angeles" className="d-block" />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/restaurantmanager-b7f1b.appspot.com/o/img%2Fhu_tiu_xa_xiu.jpg?alt=media&token=5daecea1-e14e-4ae6-9812-0839c64a73c4" alt="Los Angeles" className="d-block" />
                 </div>
                 <div className="carousel-item">
                     <img src={require('../img/baongu.PNG')} alt="Los Angeles" className="d-block" />        

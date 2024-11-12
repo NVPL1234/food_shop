@@ -34,16 +34,16 @@ export default function UpdateProductCategory() {
     }
 
     let findById = async () => {
+        setProductCategories([])
         try {
             let res = await axios.get(url + "productCategories/id?id=" + productCategoryId, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
             })
-            setProductCategories(res.data)
+            setProductCategories(pc => [...pc, res.data])
         } catch (e) {
             alert("Không tìm thấy!")
-            setProductCategories([])
         }
         setHidden(true)
     }

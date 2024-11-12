@@ -3,6 +3,7 @@ package com.example.jwt.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,9 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping("/customers")
 	public List<Customer> findAll(@RequestParam int pageNumber) {
 		return customerService.findAll(pageNumber);
@@ -39,12 +43,16 @@ public class CustomerController {
 	
 	@PostMapping("/customers")
 	public Customer save(@RequestBody Customer customer) {
-		Role role = new Role();
-		role.setRoleId(1l);
-		User user = new User();
-		user.setRole(role);
-		user = userService.save(user);
-		customer.setUser(user);
+		if(customer.getCustomerId() == null) {
+			Role role = new Role();
+			role.setRoleId(1l);
+			User user = new User();
+			user.setUsername(customer.getPhoneNumber());
+			user.setPassword(passwordEncoder.encode("1234"));
+			user.setRole(role);
+			user = userService.save(user);
+			customer.setUser(user);
+		}
 		return customerService.save(customer);
 	}
 	
@@ -56,5 +64,10 @@ public class CustomerController {
 	@GetMapping("/customers/count")
 	public long count() {
 		return customerService.count();
+	}
+	
+	@GetMapping("/customers/countNewCustomer")
+	public long countNewCustomer() {
+		return customerService.countNewCustomer();
 	}
 }
