@@ -31,41 +31,46 @@ export default function DayStatistics() {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 }
-            })   
-            setRevenue(res.data)   
+            })
+            setRevenue(res.data)
         } catch (e) {
             console.log(e.message)
         }
     }
 
     useEffect(() => {
-        if(day != 3)
+        if (day != 3)
             getRevenue()
     }, [day])
 
     return (
-        <div>
-            <label htmlFor="day">Chọn ngày</label>
-            <select id="day" value={day} onChange={e => setDay(e.target.value)}>
-                <option value={0}>Hôm nay</option>
-                <option value={30}>30 ngày</option>
-                <option value={3}>Tuỳ chỉnh</option>
-            </select>
-            <label htmlFor='first-day' className="form-label" hidden={day == 3 ? false : true}>Từ</label>
-            <input type='date' className="form-control" id='first-day' value={firstDay} onChange={e => setFirstDay(e.target.value)} hidden={day == 3 ? false : true} />
-            <label htmlFor='last-day' className="form-label" hidden={day == 3 ? false : true}>Đến</label>
-            <input type='date' className="form-control" id='last-day' value={lastDay} onChange={e => setLastDay(e.target.value)} hidden={day == 3 ? false : true} />
-            <button type="button" className="btn btn-success" onClick={e => getCusRevenue()} hidden={day == 3 ? false : true}>Thống kê</button>
+        <>
+            <div className="row mt-3">
+                <label htmlFor="day" className="col-2">Chọn ngày</label>
+                <select id="day" className="col" value={day} onChange={e => setDay(e.target.value)}>
+                    <option value={0}>Hôm nay</option>
+                    <option value={30}>30 ngày</option>
+                    <option value={3}>Tuỳ chỉnh</option>
+                </select>
+            </div>
+            <div className="row mt-3">
+                <label htmlFor='first-day' className="col-2 form-label" hidden={day == 3 ? false : true}>Từ</label>
+                <input type='date' className="col" id='first-day' value={firstDay} onChange={e => setFirstDay(e.target.value)} hidden={day == 3 ? false : true} />
+                <label htmlFor='last-day' className="col-2 form-label" hidden={day == 3 ? false : true}>Đến</label>
+                <input type='date' className="col" id='last-day' value={lastDay} onChange={e => setLastDay(e.target.value)} hidden={day == 3 ? false : true} />
+            </div>
+            <div className="row mt-3" style={{marginLeft: '16%'}}>
+                <button type="button" className="col-2 btn btn-success" onClick={e => getCusRevenue()} hidden={day == 3 ? false : true}>Thống kê</button>
+            </div>
             <ResponsiveContainer width="100%" aspect={3}>
                 <BarChart
                     width={500}
                     height={300}
                     data={revenue}
                     margin={{
-                        top: 5,
+                        top: 50,
                         right: 30,
-                        left: 20,
-                        bottom: 5,
+                        left: 30
                     }}
                 >
                     <CartesianGrid strokeDasharray="3 3" />
@@ -76,6 +81,6 @@ export default function DayStatistics() {
                     <Bar dataKey="revenue" fill="#7aa3e5" name="Tổng tiền" />
                 </BarChart>
             </ResponsiveContainer>
-        </div>
+        </>
     )
 }

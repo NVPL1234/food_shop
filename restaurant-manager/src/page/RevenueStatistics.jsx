@@ -8,7 +8,7 @@ export default function RevenueStatistics() {
 
     return (
         <div className="container-fluid">
-            <Nav></Nav>
+            <Nav />
             <label htmlFor="type">Chọn loại thống kê</label>
             <select id="type" value={type} onChange={e => setType(e.target.value)}>
                 <option value={1}>Ngày</option>

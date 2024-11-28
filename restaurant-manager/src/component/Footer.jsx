@@ -3,7 +3,7 @@ import "./Footer.css"
 
 export default function Footer() {
     return (
-        <footer className="row mt-3">
+        <footer className="row mt-5">
             <div className="row mt-3">
                 <div className="col-md">
                     <img src="https://mrchef.vn/wp-content/uploads/2023/10/MrCheef_Logo-01.png" alt="logo" style={{ width: "100px" }} />

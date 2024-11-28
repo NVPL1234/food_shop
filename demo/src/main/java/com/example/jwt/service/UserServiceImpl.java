@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 	public User save(User user) {
 		return userRepository.save(user);
 	}
+
+	@Override
+	public int updatePassword(Long userId, String password) {
+		return userRepository.updatePassword(userId, password);
+	}
 }

@@ -22,7 +22,7 @@ export default function OrderDetails(prop) {
             let amount = 0
             if(orderDetails.length == 1) {
                 if(orderDetails[0].optionName != null)
-                    orderDetails[0].productName += '<h6>' + orderDetails[0].optionName + ' ' + orderDetails[0].unitPriceOption + '</h6>' 
+                    orderDetails[0].productName += '<h6>+ ' + orderDetails[0].optionName + ' ' + orderDetails[0].unitPriceOption + '</h6>' 
                 orderDetails[0].amount = orderDetails[0].quantity * (orderDetails[0].unitPriceProduct + orderDetails[0].unitPriceOption)
                 amount = orderDetails[0].amount
                 setOrderDetails(orderDetails)
@@ -36,14 +36,14 @@ export default function OrderDetails(prop) {
                             orderDetails[i].amount = orderDetails[i].quantity * (orderDetails[i].unitPriceProduct + totalOption)
                             amount += orderDetails[i].amount
                         }
-                        orderDetails[i].productName += '<h6>' + orderDetails[i-1].optionName + ' ' + orderDetails[i-1].unitPriceOption + '</h6><h6>' + orderDetails[i].optionName + ' ' + orderDetails[i].unitPriceOption + '</h6>'
+                        orderDetails[i].productName += '<h6>+ ' + orderDetails[i-1].optionName + ' ' + orderDetails[i-1].unitPriceOption + '</h6><h6>+ ' + orderDetails[i].optionName + ' ' + orderDetails[i].unitPriceOption + '</h6>'
                     }
                     else {  
                         orderDetails[i-1].amount = orderDetails[i-1].quantity * (orderDetails[i-1].unitPriceProduct + totalOption)
                         amount += orderDetails[i-1].amount 
                         totalOption = orderDetails[i].unitPriceOption
                         if(orderDetails[i].optionName != null)
-                            orderDetails[i-1].productName += '<h6>' + orderDetails[i-1].optionName + ' ' + orderDetails[i-1].unitPriceOption + '</h6>'
+                            orderDetails[i-1].productName += '<h6>+ ' + orderDetails[i-1].optionName + ' ' + orderDetails[i-1].unitPriceOption + '</h6>'
                         if(orderDetails.length - i == 1) {
                             orderDetails[i].amount = orderDetails[i].quantity * (orderDetails[i].unitPriceProduct + totalOption)
                             amount += orderDetails[i].amount

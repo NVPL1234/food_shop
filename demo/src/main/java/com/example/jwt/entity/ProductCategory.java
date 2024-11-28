@@ -38,6 +38,10 @@ public class ProductCategory {
 	public ProductCategory() {
 	}
 
+	public ProductCategory(Long productCategoryId) {
+		this.productCategoryId = productCategoryId;
+	}
+
 	public ProductCategory(Long productCategoryId, String productCategoryName) {
 		this.productCategoryId = productCategoryId;
 		this.productCategoryName = productCategoryName;

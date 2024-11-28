@@ -58,11 +58,11 @@ export default function OrderHistory() {
     return (
         <div className="container-fluid">
             <Nav />
-            <div>
-                <label htmlFor="">Chọn ngày</label>
-                <input type='date' className="form-control" id='' value={day} onChange={e => setDay(e.target.value)} />
+            <div className="row mt-5">
+                <label htmlFor="day" className="col-2">Chọn ngày</label>
+                <input type='date' className="col" id='day' value={day} onChange={e => setDay(e.target.value)} />
             </div>
-            <div className="table-responsive-md">
+            <div className="row mt-4 table-responsive-md" style={{marginBottom: '20%'}}>
                 <table className="table">
                     <thead>
                         <tr>

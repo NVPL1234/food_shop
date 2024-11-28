@@ -75,7 +75,7 @@ export default function Nav() {
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to="/profile">Hồ sơ cá nhân</Link></li>
                                     {roleId == 1 && <li><Link className="dropdown-item" to="/order_history">Lịch sử đơn hàng</Link></li>}
-                                    <li><a className="dropdown-item" href="#">Đổi mật khẩu</a></li>
+                                    <li><Link className="dropdown-item" to="/change_password">Đổi mật khẩu</Link></li>
                                     <li><a className="dropdown-item" href="#">Đăng xuất</a></li>
                                 </ul>
                             </li>

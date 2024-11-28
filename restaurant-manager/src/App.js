@@ -15,6 +15,7 @@ import UpdateOption from './page/UpdateOption'
 import UpdateOptionCategory from './page/UpdateOptionCategory'
 import RevenueStatistics from './page/RevenueStatistics'
 import Profile from './page/Profile'
+import ChangePassword from './page/ChangePassword'
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ export default function App() {
         <Route path='/update_option_category' element={<UpdateOptionCategory />}></Route>
         <Route path='/revenue_statistics' element={<RevenueStatistics />}></Route>
         <Route path='/profile' element={<Profile />}></Route>
+        <Route path='/change_password' element={<ChangePassword />}></Route>
       </Routes>
     </BrowserRouter>
   );

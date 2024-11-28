@@ -1,4 +1,4 @@
-.txt-product-name {
+.txt-product-name, input, select {
     height: 45px;
     margin-right: 10px;
     border: 1px solid #EFEFEF;
@@ -6,7 +6,7 @@
     font-size: 18px;
 }
 
-.txt-product-name::placeholder {
+.txt-product-name::placeholder, input::placeholder, select::placeholder {
     color: #9295A3;
 }
 

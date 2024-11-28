@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import Nav from '../component/Nav'
 import { url } from '../url'
+import './Dashboard.css'
 
 export default function Dashboard() {
 
@@ -12,7 +13,7 @@ export default function Dashboard() {
     const [totalOrder, setTotalOrder] = useState(0)
     const [totalCustomer, setTotalCustomer] = useState(0)
 
-    let getRevenue = async () => {
+    let getData = async () => {
         try {
             let res = await axios.get(url + 'orders/revenue?dayNum=' + 0, {
                 headers: {
@@ -25,6 +26,7 @@ export default function Dashboard() {
                     'Authorization': 'Bearer ' + token
                 }
             })
+            setTotalOrder(res.data)
             res = await axios.get(url + 'customers/countNewCustomer', {
                 headers: {
                     'Authorization': 'Bearer ' + token
@@ -37,27 +39,27 @@ export default function Dashboard() {
     }
 
     useEffect(() => {
-        getRevenue()
+        getData()
     }, [])
 
     return (
         <div className="container-fluid">
             <Nav />
-            <div>
-                <div>
+            <div className='row'>
+                <div className='col-sm statistics'>
                     <h5>Doanh thu</h5>
                     <h5>{revenue.length !=0 ? revenue[0].revenue : 0}đ</h5>
                 </div>
-                <div>
+                <div className='col-sm statistics'>
                     <h5>Đơn hàng</h5>
                     <h5>{totalOrder} đơn</h5>
                 </div>
-                <div>
+                <div className='col-sm statistics'>
                     <h5>Khách hàng mới</h5>
                     <h5>{totalCustomer}</h5>
                 </div>
             </div>
-            <div>
+            <div className='row mt-4'>
                 <ResponsiveContainer width="100%" aspect={3}>
                     <BarChart
                         width={500}

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.example.jwt.dto.OptionDTO;
 import com.example.jwt.dto.ProductDTO;
 import com.example.jwt.entity.Product;
+import com.example.jwt.entity.ProductCategory;
 import com.example.jwt.repository.ProductRepository;
 
 @Service
@@ -42,6 +43,16 @@ public class ProductServiceImpl implements ProductService {
 	public Product findById(Long id) {
 		Optional<Product> result = productRepository.findById(id);
 		return result.get();
+	}
+	
+	@Override
+	public List<Product> findByProductName(String productName) {
+		return productRepository.findByProductName(productName);
+	}
+	
+	@Override
+	public List<Product> findByProductCategory(ProductCategory productCategory) {
+		return productRepository.findByProductCategory(productCategory);
 	}
 
 	@Override

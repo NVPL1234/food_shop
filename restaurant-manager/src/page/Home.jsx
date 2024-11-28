@@ -9,22 +9,43 @@ import Footer from "../component/Footer"
 import { TfiSearch } from "react-icons/tfi"
 import { url } from "../url"
 import "./Home.css"
+import Products from "../component/Products"
 
 export default function Home() {
 
+    const [productCategories, setProductCategories] = useState([])
     const [products, setProducts] = useState([])
     const [product, setProduct] = useState()
+    const [productName, setProductName] = useState('')
     const token = useSelector((state) => state.user.value.token)
     const navigate = useNavigate()
 
     let getData = async () => {
-        await axios.get(url + "productAndProductCategoies", {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        })
-            .then(res => setProducts(res.data))
-            .catch(e => navigate("/login"))
+        try {
+            let res = await axios.get(url + "productCategories", {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            setProductCategories(res.data)
+        } catch (error) {
+            navigate("/login")
+        }
+    }
+
+    let findByProductName = async () => {
+        setProductCategories([])
+        setProducts([])
+        try {
+            let res = await axios.get(url + 'products/name?productName=' + productName, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            setProducts(res.data)
+        } catch (e) {
+            console.log(e.message)
+        }
     }
 
     useEffect(() => {
@@ -36,14 +57,13 @@ export default function Home() {
             <Nav />
             <Slide />
             <section className="row mt-3">
-                <input type="text" className="col-md txt-product-name" placeholder="Bạn muốn tìm sản phẩm gì?" />
-                <button type="button" className="col-md-1 btn btn-success me-2"><TfiSearch /></button>
+                <input type="text" className="col-md txt-product-name" placeholder="Bạn muốn tìm sản phẩm gì?" value={productName} onChange={e => setProductName(e.target.value)} />
+                <button type="button" className="col-md-1 btn btn-success me-2" onClick={e => findByProductName()}><TfiSearch /></button>
             </section>
             <section className="row mt-3">
                 {
-                    products.map((product, i, arr) =>
-                        <div className="col-6 col-sm-3 col-md-3" key={i}>
-                            {i == 0 ? <h5 className="row">{product.productCategoryName}</h5> : (arr[i - 1].productCategoryName != product.productCategoryName ? <h5 className="row">{product.productCategoryName}</h5> : <h5 className="row" style={{visibility: 'hidden'}}>.</h5>)}
+                    products.map((product) =>
+                        <div className="col-6 col-sm-3 col-md-3" key={product.productId}>
                             <div className="row product" data-bs-toggle="modal" data-bs-target="#myModal" onClick={e => setProduct(product)}>
                                 <img src={product.imgPath} />
                                 <h5>{product.productName}</h5>
@@ -53,6 +73,14 @@ export default function Home() {
                     )
                 }
             </section>
+            {
+                productCategories.map(pc =>
+                    <section className="row mt-3" key={pc.productCategoryId}>
+                        <h4 style={{textAlign: 'center'}}>--{pc.productCategoryName}--</h4>
+                        <Products productCategory={pc} setProduct={setProduct} />
+                    </section>
+                )
+            }
             <Footer />
 
             <div className="modal" id="myModal">

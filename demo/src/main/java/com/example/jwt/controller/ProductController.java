@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.jwt.dto.OptionDTO;
 import com.example.jwt.dto.ProductDTO;
 import com.example.jwt.entity.Product;
+import com.example.jwt.entity.ProductCategory;
 import com.example.jwt.service.ProductService;
 
 @RestController
@@ -31,6 +32,17 @@ public class ProductController {
 	@GetMapping("/products/id")
 	public Product findById(@RequestParam Long id) {
 		return productService.findById(id);
+	}
+
+	@GetMapping("/products/name")
+	public List<Product> findByProductName(@RequestParam String productName) {
+		return productService.findByProductName(productName);
+	}
+	
+	@GetMapping("/products/productCategory")
+	public List<Product> findByProductCategory(@RequestParam Long productCategoryId) {
+		ProductCategory productCategory = new ProductCategory(productCategoryId);
+		return productService.findByProductCategory(productCategory);
 	}
 	
 	@GetMapping("/productAndProductCategoies")
