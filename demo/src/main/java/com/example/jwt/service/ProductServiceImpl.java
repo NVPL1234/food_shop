@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.jwt.dto.OptionDTO;
-import com.example.jwt.dto.ProductDTO;
 import com.example.jwt.entity.Product;
 import com.example.jwt.entity.ProductCategory;
 import com.example.jwt.repository.ProductRepository;
@@ -23,13 +22,13 @@ public class ProductServiceImpl implements ProductService {
 	private ProductRepository productRepository;
 
 	@Override
-	public List<ProductDTO> getAll() {
-		return productRepository.getAll();
+	public List<OptionDTO> getOptions(Long productId) {
+		return productRepository.getOptions(productId);
 	}
 	
 	@Override
-	public List<OptionDTO> getOptions(Long productId) {
-		return productRepository.getOptions(productId);
+	public List<Product> findAll() {
+		return productRepository.findAll();
 	}
 	
 	@Override

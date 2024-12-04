@@ -7,7 +7,7 @@ export default function CustomerForm(prop) {
 
     const customer = prop.customer
     const getData = prop.getData
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const activePage = useSelector((state) => state.activePage.value)
     const [customerName, setCustomerName] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -23,7 +23,7 @@ export default function CustomerForm(prop) {
                 createDate: customer != null ? customer.createDate : new Date().toISOString()
             }, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
         } catch (error) {

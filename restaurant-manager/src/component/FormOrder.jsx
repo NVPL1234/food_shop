@@ -8,7 +8,7 @@ import { url } from "../url"
 
 export default function FormOrder(prop) {
 
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const product = prop.product
     const [quantity, setQuantity] = useState(1)
     const [options, setOptions] = useState([])
@@ -24,7 +24,7 @@ export default function FormOrder(prop) {
         setAmount(product.unitPrice)
         await axios.get(url + "products/option?productId=" + product.productId, {
             headers: {
-                "Authorization": "Bearer " + token
+                "Authorization": "Bearer " + user.token
             }
         })
             .then(res => setOptions(res.data))

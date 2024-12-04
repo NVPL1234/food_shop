@@ -7,14 +7,14 @@ export default function Products(prop) {
 
     const productCategory = prop.productCategory
     const setProduct = prop.setProduct
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const [products, setProducts] = useState([])
 
     let getData = async () => {
         try {
             let res = await axios.get(url + 'products/productCategory?productCategoryId=' + productCategory.productCategoryId, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             });
             setProducts(res.data) 

@@ -7,7 +7,7 @@ export default function ProductCategoryForm(prop) {
 
     const productCategory = prop.productCategory
     const getData = prop.getData
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const activePage = useSelector((state) => state.activePage.value)
     const [productCategoryName, setProductCategoryName] = useState('')
 
@@ -18,7 +18,7 @@ export default function ProductCategoryForm(prop) {
                 productCategoryName: productCategoryName
             }, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
         } catch (error) {

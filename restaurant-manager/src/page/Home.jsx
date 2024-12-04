@@ -17,14 +17,14 @@ export default function Home() {
     const [products, setProducts] = useState([])
     const [product, setProduct] = useState()
     const [productName, setProductName] = useState('')
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const navigate = useNavigate()
 
     let getData = async () => {
         try {
             let res = await axios.get(url + "productCategories", {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setProductCategories(res.data)
@@ -39,7 +39,7 @@ export default function Home() {
         try {
             let res = await axios.get(url + 'products/name?productName=' + productName, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setProducts(res.data)

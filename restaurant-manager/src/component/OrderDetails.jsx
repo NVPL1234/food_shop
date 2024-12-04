@@ -5,7 +5,7 @@ import { url } from "../url"
 
 export default function OrderDetails(prop) {
 
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const orderId = prop.orderId
     const [orderDetails, setOrderDetails] = useState([])
     const [total, setTotal] = useState(0)
@@ -14,7 +14,7 @@ export default function OrderDetails(prop) {
         try {
             let res = await axios.get(url + 'orderDetails?orderId=' + orderId, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             let orderDetails = res.data

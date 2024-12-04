@@ -12,7 +12,7 @@ import "./UpdateProduct.css"
 
 export default function UpdateOptionCategory() {
 
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const [hidden, setHidden] = useState(false)
     const activePage = useSelector((state) => state.activePage.value)
     const [totalPage, setTotalPage] = useState(0)
@@ -24,7 +24,7 @@ export default function UpdateOptionCategory() {
         try {
             let res = await axios.get(url + "optionCategories?pageNumber=" + pageNumber, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setOptionCategories(res.data)
@@ -38,7 +38,7 @@ export default function UpdateOptionCategory() {
         try {
             let res = await axios.get(url + "optionCategories/id?id=" + optionCategoryId, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setOptionCategories(oc => [...oc, res.data])
@@ -54,7 +54,7 @@ export default function UpdateOptionCategory() {
         try {
             await axios.delete(url + "optionCategories?id=" + id, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             alert('Xoá thành công!')
@@ -67,7 +67,7 @@ export default function UpdateOptionCategory() {
     let count = async () => {
         await axios.get(url + "optionCategories/count", {
             headers: {
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + user.token
             }
         })
             .then(res => {

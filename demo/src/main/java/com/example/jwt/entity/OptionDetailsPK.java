@@ -3,21 +3,42 @@ package com.example.jwt.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class OptionDetailsPK implements Serializable {
-
-	private Long optionCategory;
-	private Long product;
 	
+	@Column(name = "option_category_id")
+	private Long optionCategoryId;
+	
+	@Column(name = "product_id")
+	private Long productId;
+	
+	public Long getOptionCategoryId() {
+		return optionCategoryId;
+	}
+
+	public void setOptionCategoryId(Long optionCategoryId) {
+		this.optionCategoryId = optionCategoryId;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+
 	public OptionDetailsPK() {
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(optionCategory, product);
+		return Objects.hash(optionCategoryId, productId);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -27,6 +48,6 @@ public class OptionDetailsPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		OptionDetailsPK other = (OptionDetailsPK) obj;
-		return Objects.equals(optionCategory, other.optionCategory) && Objects.equals(product, other.product);
+		return Objects.equals(optionCategoryId, other.optionCategoryId) && Objects.equals(productId, other.productId);
 	}
 }

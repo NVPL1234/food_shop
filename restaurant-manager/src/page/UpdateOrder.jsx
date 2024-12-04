@@ -12,7 +12,7 @@ export default function UpdateOrder() {
     const user = useSelector((state) => state.user.value)
     const [day, setDay] = useState(new Date().toJSON().slice(0, 10))
     const [orders, setOrders] = useState([])
-    const [orderId, setOrderId] = useState('')    
+    const [orderId, setOrderId] = useState('')
 
     let getData = async () => {
         try {
@@ -21,7 +21,7 @@ export default function UpdateOrder() {
                     'Authorization': 'Bearer ' + user.token
                 }
             })
-            setOrders(res.data)            
+            setOrders(res.data)
         } catch (e) {
             console.log(e.message)
         }
@@ -45,6 +45,12 @@ export default function UpdateOrder() {
     }
 
     let updateStatus = async (order, status) => {
+        if (status !== 5) {
+            if (order.orderStatus < 3)
+                status = 3
+            else if (order.orderStatus < 4)
+                status = 4
+        }
         try {
             await axios.post(url + 'orders', {
                 orderId: order.orderId,
@@ -56,7 +62,6 @@ export default function UpdateOrder() {
                     'Authorization': 'Bearer ' + user.token
                 }
             })
-            
         } catch (e) {
             console.log(e.message)
         }
@@ -97,8 +102,8 @@ export default function UpdateOrder() {
                                     <td>{order.orderDate}</td>
                                     <td>{handleStatus(order.orderStatus)}</td>
                                     <td>
-                                        <button type="button" className="btn btn-success" onClick={e => updateStatus(order, 3)} disabled={order.orderStatus >= 3 ? true : false}>Chấp nhận</button> | &nbsp;
-                                        <button type="button" className="btn btn-danger" onClick={e => updateStatus(order, 5)} disabled={order.orderStatus == 5 ? true : false}>Huỷ</button> | &nbsp;
+                                        <button type="button" className="btn btn-success" onClick={e => updateStatus(order, 0)} disabled={order.orderStatus >= 4 ? true : false}>{order.orderStatus < 3 ? 'Chấp nhận' : 'Hoàn tất'}</button> | &nbsp;
+                                        <button type="button" className="btn btn-danger" onClick={e => updateStatus(order, 5)} disabled={order.orderStatus > 3 ? true : false}>Huỷ</button> | &nbsp;
                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" onClick={e => setOrderId(order.orderId)}>Xem chi tiết</button>
                                     </td>
                                 </tr>

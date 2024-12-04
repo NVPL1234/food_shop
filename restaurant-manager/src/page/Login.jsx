@@ -22,11 +22,7 @@ export default function Login() {
                 password: password
             })
             dispatch(save(res.data))
-            let user = res.data
-            if(user.roleId == 1)
-                navigate("/")
-            else
-                navigate("/dashboard")
+            navigate("/")
         } catch (error) {
             console.log(error.message);
             alert(error.message)

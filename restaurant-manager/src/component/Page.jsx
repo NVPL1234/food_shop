@@ -52,7 +52,7 @@ export default function Page(prop) {
     let handleChange = (button) => {
         if (button.text == '...')
             return
-        if (button.text > buttons[3].text && button.text != totalPage) {
+        if (totalPage > 7 && button.text > buttons[3].text && button.text != totalPage) {
             switch (totalPage - button.text) {
                 case 1:
                     setButtons([
@@ -156,7 +156,7 @@ export default function Page(prop) {
                     break;
             }
         }
-        else if (button.text < buttons[3].text && button.text > 1) {
+        else if (totalPage > 7 && button.text < buttons[3].text && button.text > 1) {
             switch (button.text - 1) {
                 case 1:
                     setButtons([

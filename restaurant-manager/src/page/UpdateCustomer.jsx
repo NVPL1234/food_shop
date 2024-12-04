@@ -12,7 +12,7 @@ import "./UpdateProduct.css"
 
 export default function UpdateCustomer() {
 
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const [hidden, setHidden] = useState(false)
     const activePage = useSelector((state) => state.activePage.value)
     const [totalPage, setTotalPage] = useState(0)
@@ -24,7 +24,7 @@ export default function UpdateCustomer() {
         try {
             let res = await axios.get(url + "customers?pageNumber=" + pageNumber, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setCustomers(res.data)
@@ -38,7 +38,7 @@ export default function UpdateCustomer() {
         try {
             let res = await axios.get(url + "customers/id?customerId=" + customerId, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setCustomers(c => [...c, res.data])
@@ -54,7 +54,7 @@ export default function UpdateCustomer() {
         try {
             await axios.delete(url + "customers?id=" + id, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             alert('Xoá thành công!')
@@ -67,7 +67,7 @@ export default function UpdateCustomer() {
     let count = async () => {
         await axios.get(url + "customers/count", {
             headers: {
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + user.token
             }
         })
             .then(res => {

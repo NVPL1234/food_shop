@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.jwt.dto.OptionDTO;
-import com.example.jwt.dto.ProductDTO;
 import com.example.jwt.entity.Product;
 import com.example.jwt.entity.ProductCategory;
 import com.example.jwt.service.ProductService;
@@ -23,8 +22,13 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
-	
+
 	@GetMapping("/products")
+	public List<Product> findAll() {
+		return productService.findAll();
+	}
+	
+	@GetMapping("/products/page")
 	public List<Product> findAll(@RequestParam int pageNumber) {
 		return productService.findAll(pageNumber);
 	}
@@ -43,11 +47,6 @@ public class ProductController {
 	public List<Product> findByProductCategory(@RequestParam Long productCategoryId) {
 		ProductCategory productCategory = new ProductCategory(productCategoryId);
 		return productService.findByProductCategory(productCategory);
-	}
-	
-	@GetMapping("/productAndProductCategoies")
-	public List<ProductDTO> getAll() {
-		return productService.getAll();
 	}
 	
 	@GetMapping("/products/option")

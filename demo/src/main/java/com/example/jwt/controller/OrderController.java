@@ -38,9 +38,15 @@ public class OrderController {
 	
 	@PostMapping("/orders")
 	public Order save(@RequestBody Order order) {
-		order = orderService.save(order);
-		server.getBroadcastOperations().sendEvent("update", "Order status updated");
-		return order;
+		if(order.getOrderId() != null) {
+			order = orderService.save(order);
+			server.getBroadcastOperations().sendEvent("update", "Update success");	
+			return order;
+		}
+		else {
+			order = orderService.save(order);		
+			return order;
+		}
 	}
 	
 	@GetMapping("/orders/revenue")

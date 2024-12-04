@@ -18,7 +18,7 @@ export default function UpdateProduct() {
     const [productId, setProductId] = useState("")
     const [totalPage, setTotalPage] = useState(0)
     const [hidden, setHidden] = useState(false)
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const activePage = useSelector((state) => state.activePage.value)
     const storage = getStorage();
 
@@ -26,7 +26,7 @@ export default function UpdateProduct() {
         try {
             let res = await axios.get(url + "products?pageNumber=" + pageNumber, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setProducts(res.data)
@@ -40,7 +40,7 @@ export default function UpdateProduct() {
         try {
             let res = await axios.get(url + "products/id?id=" + id, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setProducts(p => [...p, res.data])
@@ -56,7 +56,7 @@ export default function UpdateProduct() {
         try {
             await axios.delete(url + "products?id=" + product.productId, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             alert('Xoá thành công!')
@@ -75,7 +75,7 @@ export default function UpdateProduct() {
     let count = async () => {
         await axios.get(url + "products/count", {
             headers: {
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + user.token
             }
         })
             .then(res => {

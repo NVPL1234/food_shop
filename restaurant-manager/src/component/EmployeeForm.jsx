@@ -8,7 +8,7 @@ export default function EmployeeForm(prop) {
 
     const employee = prop.employee
     const getData = prop.getData
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const activePage = useSelector((state) => state.activePage.value)
     const [img, setImg] = useState(null)
     const [imgPath, setImgPath] = useState('')
@@ -45,7 +45,7 @@ export default function EmployeeForm(prop) {
                             idCardNumber: idCardNumber
                         }, {
                             headers: {
-                                'Authorization': 'Bearer ' + token
+                                'Authorization': 'Bearer ' + user.token
                             }
                         })
                     } catch (error) {
@@ -85,7 +85,7 @@ export default function EmployeeForm(prop) {
                     idCardNumber: idCardNumber
                 }, {
                     headers: {
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + user.token
                     }
                 })
             } catch (error) {

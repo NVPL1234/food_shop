@@ -12,7 +12,7 @@ import "./UpdateProduct.css"
 
 export default function UpdateProductCategory() {
 
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const [hidden, setHidden] = useState(false)
     const activePage = useSelector((state) => state.activePage.value)
     const [totalPage, setTotalPage] = useState(0)
@@ -24,7 +24,7 @@ export default function UpdateProductCategory() {
         try {
             let res = await axios.get(url + "productCategories?pageNumber=" + pageNumber, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setProductCategories(res.data)
@@ -38,7 +38,7 @@ export default function UpdateProductCategory() {
         try {
             let res = await axios.get(url + "productCategories/id?id=" + productCategoryId, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setProductCategories(pc => [...pc, res.data])
@@ -54,7 +54,7 @@ export default function UpdateProductCategory() {
         try {
             await axios.delete(url + "productCategories?id=" + id, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             alert('Xoá thành công!')
@@ -67,7 +67,7 @@ export default function UpdateProductCategory() {
     let count = async () => {
         await axios.get(url + "productCategories/count", {
             headers: {
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + user.token
             }
         })
             .then(res => {

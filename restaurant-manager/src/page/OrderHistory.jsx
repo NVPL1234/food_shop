@@ -6,7 +6,6 @@ import { socket } from '../socket'
 import Nav from '../component/Nav'
 import OrderDetails from "../component/OrderDetails"
 import Footer from '../component/Footer'
-import { TfiSearch } from 'react-icons/tfi'
 
 export default function OrderHistory() {
 

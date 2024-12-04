@@ -15,7 +15,7 @@ export default function UpdateEmployee() {
 
     const [totalPage, setTotalPage] = useState(0)
     const [hidden, setHidden] = useState(false)
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const activePage = useSelector((state) => state.activePage.value)
     const [employees, setEmployees] = useState([])
     const [employee, setEmployee] = useState(null)
@@ -26,7 +26,7 @@ export default function UpdateEmployee() {
         try {
             let res = await axios.get(url + "employees?pageNumber=" + pageNumber, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setEmployees(res.data)
@@ -40,7 +40,7 @@ export default function UpdateEmployee() {
         try {
             let res = await axios.get(url + "employees/id?id=" + employeeId, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setEmployee(e => [...e, res.data])
@@ -56,7 +56,7 @@ export default function UpdateEmployee() {
         try {
             await axios.delete(url + "employees?id=" + employee.employeeId, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             alert('Xoá thành công!')
@@ -75,7 +75,7 @@ export default function UpdateEmployee() {
     let count = async () => {
         await axios.get(url + "employees/count", {
             headers: {
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + user.token
             }
         })
             .then(res => {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.corundumstudio.socketio.SocketIOServer;
 import com.example.jwt.dto.OrderDetailsDTO;
 import com.example.jwt.entity.OrderDetails;
 import com.example.jwt.service.OrderDetailsService;
@@ -21,6 +22,9 @@ public class OrderDetailsController {
 	@Autowired
 	private OrderDetailsService orderDetailsService;
 	
+	@Autowired
+	private SocketIOServer server;
+	
 	@GetMapping("/orderDetails")
 	public List<OrderDetailsDTO> findBy(@RequestParam String orderId) {
 		return orderDetailsService.findBy(orderId);
@@ -28,6 +32,8 @@ public class OrderDetailsController {
 	
 	@PostMapping("/orderDetails")
 	public OrderDetails save(@RequestBody OrderDetails orderDetails) {
-		return orderDetailsService.save(orderDetails);
+		orderDetails = orderDetailsService.save(orderDetails);
+		server.getBroadcastOperations().sendEvent("add", "Add success");	
+		return orderDetails;
 	}
 }

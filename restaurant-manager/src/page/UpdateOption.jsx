@@ -12,7 +12,7 @@ import "./UpdateProduct.css"
 
 export default function UpdateOption() {
 
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const [hidden, setHidden] = useState(false)
     const activePage = useSelector((state) => state.activePage.value)
     const [totalPage, setTotalPage] = useState(0)
@@ -24,7 +24,7 @@ export default function UpdateOption() {
         try {
             let res = await axios.get(url + "options?pageNumber=" + pageNumber, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setOptions(res.data)
@@ -38,7 +38,7 @@ export default function UpdateOption() {
         try {
             let res = await axios.get(url + "options/id?id=" + optionId, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setOptions(o => [...o, res.data])
@@ -54,7 +54,7 @@ export default function UpdateOption() {
         try {
             await axios.delete(url + "options?id=" + id, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             alert('Xoá thành công!')
@@ -67,7 +67,7 @@ export default function UpdateOption() {
     let count = async () => {
         await axios.get(url + "options/count", {
             headers: {
-                'Authorization': 'Bearer ' + token
+                'Authorization': 'Bearer ' + user.token
             }
         })
             .then(res => {

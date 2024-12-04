@@ -10,27 +10,24 @@ import { url } from '../url'
 export default function Profile() {
 
     const user = useSelector((state) => state.user.value)
-    const userId = user.userId
-    const token = user.token
-    const roleId = user.roleId
     const [customer, setCustomer] = useState({})
     const [employee, setEmployee] = useState({})
 
     let getData = async () => {
         try {
             let res
-            if(roleId == 1) {
-                res = await axios.get(url + 'customers/id?customerId=' + userId, {
+            if(user.roleId == 1) {
+                res = await axios.get(url + 'customers/id?customerId=' + user.userId, {
                     headers: {
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + user.token
                     }
                 })
                 setCustomer(res.data)
             }                
             else {
-                res = await axios.get(url + 'employees/id?id=' + userId, {
+                res = await axios.get(url + 'employees/id?id=' + user.userId, {
                     headers: {
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + user.token
                     }
                 })
                 setEmployee(res.data)
@@ -47,9 +44,9 @@ export default function Profile() {
     return (
         <div className="container-fluid">
             <Nav />
-            {roleId == 1 && <Customer customer={customer} />}
-            {roleId == 2 && <Employee employee={employee} />}
-            {roleId == 1 && <Footer />}
+            {user.roleId == 1 && <Customer customer={customer} />}
+            {user.roleId == 2 && <Employee employee={employee} />}
+            {user.roleId == 1 && <Footer />}
         </div>
     )
 }

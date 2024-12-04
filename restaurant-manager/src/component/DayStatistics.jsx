@@ -6,7 +6,7 @@ import { url } from '../url'
 
 export default function DayStatistics() {
 
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const [day, setDay] = useState(0)
     const [firstDay, setFirstDay] = useState('')
     const [lastDay, setLastDay] = useState('')
@@ -16,7 +16,7 @@ export default function DayStatistics() {
         try {
             let res = await axios.get(url + 'orders/revenue?dayNum=' + day, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setRevenue(res.data)
@@ -29,7 +29,7 @@ export default function DayStatistics() {
         try {
             let res = await axios.get(url + 'orders/cus_revenue?firstDay=' + firstDay + '&lastDay=' + lastDay, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setRevenue(res.data)

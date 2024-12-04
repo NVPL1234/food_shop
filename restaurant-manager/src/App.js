@@ -16,29 +16,32 @@ import UpdateOptionCategory from './page/UpdateOptionCategory'
 import RevenueStatistics from './page/RevenueStatistics'
 import Profile from './page/Profile'
 import ChangePassword from './page/ChangePassword'
+import { useSelector } from 'react-redux'
 
 export default function App() {
+
+  const user = useSelector((state) => state.user.value)
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/login' element={<Login />}></Route>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/payment' element={<Payment />}></Route>
-        <Route path='/payment_success' element={<PaymentSuccess />}></Route>
-        <Route path='/order_success' element={<OrderSuccess />}></Route>
-        <Route path='/order_history' element={<OrderHistory />}></Route>
-        <Route path='/dashboard' element={<Dashboard />}></Route>
-        <Route path='/update_product' element={<UpdateProduct />}></Route>
-        <Route path='/update_product_category' element={<UpdateProductCategory />}></Route>
-        <Route path='/update_order' element={<UpdateOrder />}></Route>
-        <Route path='/update_customer' element={<UpdateCustomer />}></Route>
-        <Route path='/update_employee' element={<UpdateEmployee />}></Route>
-        <Route path='/update_option' element={<UpdateOption />}></Route>
-        <Route path='/update_option_category' element={<UpdateOptionCategory />}></Route>
-        <Route path='/revenue_statistics' element={<RevenueStatistics />}></Route>
-        <Route path='/profile' element={<Profile />}></Route>
-        <Route path='/change_password' element={<ChangePassword />}></Route>
+        {user.token == '' && <Route path='/login' element={<Login />}></Route>}
+        <Route path='/' element={user.roleId == 1 ? <Home /> : <Dashboard />}></Route>
+        {user.roleId == 1 && <Route path='/payment' element={<Payment />}></Route>}
+        {user.roleId == 1 && <Route path='/payment_success' element={<PaymentSuccess />}></Route>}
+        {user.roleId == 1 && <Route path='/order_success' element={<OrderSuccess />}></Route>}
+        {user.roleId == 1 && <Route path='/order_history' element={<OrderHistory />}></Route>}
+        {user.roleId == 2 && <Route path='/update_product' element={<UpdateProduct />}></Route>}
+        {user.roleId == 2 && <Route path='/update_product_category' element={<UpdateProductCategory />}></Route>}
+        {user.roleId == 2 && <Route path='/update_order' element={<UpdateOrder />}></Route>}
+        {user.roleId == 2 && <Route path='/update_customer' element={<UpdateCustomer />}></Route>}
+        {user.roleId == 2 && <Route path='/update_employee' element={<UpdateEmployee />}></Route>}
+        {user.roleId == 2 && <Route path='/update_option' element={<UpdateOption />}></Route>}
+        {user.roleId == 2 && <Route path='/update_option_category' element={<UpdateOptionCategory />}></Route>}
+        {user.roleId == 2 && <Route path='/revenue_statistics' element={<RevenueStatistics />}></Route>}
+        {user.token != '' && <Route path='/profile' element={<Profile />}></Route>}
+        {user.token != '' && <Route path='/change_password' element={<ChangePassword />}></Route>}
       </Routes>
     </BrowserRouter>
-  );
+  )
 }

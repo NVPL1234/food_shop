@@ -7,7 +7,7 @@ export default function OptionForm(prop) {
 
     const option = prop.option
     const getData = prop.getData
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const activePage = useSelector((state) => state.activePage.value)
     const [optionName, setOptionName] = useState('')
     const [unitPrice, setUnitPrice] = useState(0)
@@ -25,7 +25,7 @@ export default function OptionForm(prop) {
                 }
             }, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
         } catch (error) {
@@ -39,7 +39,7 @@ export default function OptionForm(prop) {
         try {
             let res = await axios.get(url + 'optionCategories', {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setOptionCategories(res.data)

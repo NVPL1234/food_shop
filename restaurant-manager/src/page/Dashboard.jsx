@@ -1,14 +1,17 @@
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import Nav from '../component/Nav'
+import { socket } from '../socket'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { url } from '../url'
 import './Dashboard.css'
+import { useNavigate } from 'react-router-dom'
 
 export default function Dashboard() {
 
-    const token = useSelector((state) => state.user.value.token)
+    const navigate = useNavigate()
+    const user = useSelector((state) => state.user.value)
     const [revenue, setRevenue] = useState([])
     const [totalOrder, setTotalOrder] = useState(0)
     const [totalCustomer, setTotalCustomer] = useState(0)
@@ -17,19 +20,19 @@ export default function Dashboard() {
         try {
             let res = await axios.get(url + 'orders/revenue?dayNum=' + 0, {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setRevenue(res.data)
             res = await axios.get(url + 'orders/count', {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setTotalOrder(res.data)
             res = await axios.get(url + 'customers/countNewCustomer', {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setTotalCustomer(res.data)
@@ -39,7 +42,17 @@ export default function Dashboard() {
     }
 
     useEffect(() => {
-        getData()
+        if(user.token == '')
+            navigate('/login')
+        else {
+            socket.connect()
+            socket.on("add", getData)
+            getData()
+            return () => {
+                socket.off('add', getData)
+                socket.disconnect()
+            }
+        }
     }, [])
 
     return (

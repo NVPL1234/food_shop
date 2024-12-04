@@ -8,7 +8,7 @@ export default function FormProduct(prop) {
 
     const product = prop.product
     const getData = prop.getData
-    const token = useSelector((state) => state.user.value.token)
+    const user = useSelector((state) => state.user.value)
     const activePage = useSelector((state) => state.activePage.value)
     const [img, setImg] = useState(null)
     const [imgPath, setImgPath] = useState('')
@@ -52,7 +52,7 @@ export default function FormProduct(prop) {
                             }
                         }, {
                             headers: {
-                                'Authorization': 'Bearer ' + token
+                                'Authorization': 'Bearer ' + user.token
                             }
                         })
                     } catch (error) {
@@ -95,7 +95,7 @@ export default function FormProduct(prop) {
                     }
                 }, {
                     headers: {
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + user.token
                     }
                 })
             } catch (error) {
@@ -110,7 +110,7 @@ export default function FormProduct(prop) {
         try {
             let res = await axios.get(url + 'productCategories', {
                 headers: {
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + user.token
                 }
             })
             setProductCategories(res.data)
